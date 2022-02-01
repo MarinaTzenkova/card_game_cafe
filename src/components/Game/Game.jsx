@@ -66,6 +66,7 @@ export default function Game() {
           ))}
         </select>
       </div>
+      {/* Input fields for participants --> TODO */}
       {/* <div className="mt-2">
         {[...Array(players)].map((field, _index) => (
           <div className="text-xl text-gray-400 mt-2" key={_index}>
