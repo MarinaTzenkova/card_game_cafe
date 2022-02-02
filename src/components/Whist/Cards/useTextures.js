@@ -17,5 +17,9 @@ export default function useTextures() {
   card_front.scene.children[0].rotation.x += 0.8;
   //   card_back.scene.children[0].rotation.x += 0.8;
 
-  return { ace_hearts, ace_spades, ace_clubs, ace_diamonds, card_front };
+  const cards = [];
+
+  cards.push(ace_hearts, ace_spades, ace_clubs, ace_diamonds);
+
+  return { cards };
 }

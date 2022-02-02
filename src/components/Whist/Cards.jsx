@@ -14,38 +14,38 @@ export default function Cards() {
 
   return (
     <>
-      <DragableObject>
+      <DragableObject z={1}>
         <Card
           face={ace_hearts}
           position={{
-            group: new Vector3(0, 10, 0),
+            group: new Vector3(0, 10, 1),
             face: new Vector3(0, 0, 0),
           }}
         />
       </DragableObject>
-      <DragableObject>
+      <DragableObject z={2}>
         <Card
           face={ace_clubs}
           position={{
-            group: new Vector3(0, 10, 0),
+            group: new Vector3(-12, 10, 2),
             face: new Vector3(0, 0, 0),
           }}
         />
       </DragableObject>
-      <DragableObject>
+      <DragableObject z={3}>
         <Card
           face={ace_diamonds}
           position={{
-            group: new Vector3(0, 10, 0),
+            group: new Vector3(0, 10, 3),
             face: new Vector3(0, 0, 0),
           }}
         />
       </DragableObject>
-      <DragableObject>
+      <DragableObject z={4}>
         <Card
           face={ace_spades}
           position={{
-            group: new Vector3(0, 10, 0),
+            group: new Vector3(0, 10, 4),
             face: new Vector3(0, 0, 0),
           }}
         />

@@ -6,6 +6,7 @@ import NavBar from "./common/NavBar";
 import Game from "./Game/Game";
 import { Home } from "./Home/Home";
 import Cards from "./Whist/Cards";
+import Deck from "./Whist/Cards/Deck";
 import RWhist from "./Whist/RWhist";
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
               >
                 <ambientLight intensity={1} />
                 <Suspense fallback={null}>
-                  <Cards />
+                  <Deck />
                 </Suspense>
               </Canvas>
             }
