@@ -1,21 +1,32 @@
 import { useLoader } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
+
+const heartsUrl = "/cards/hearts";
+const clubsUrl = "/cards/clubs";
+const spadesUrl = "/cards/spades";
+const diamondsUrl = "/cards/diamonds";
 
 export default function useTextures() {
-  const ace_hearts = useLoader(GLTFLoader, "/ace/ace_hearts.glb");
-  const ace_spades = useLoader(GLTFLoader, "/ace/ace_spades.glb");
-  const ace_clubs = useLoader(GLTFLoader, "/ace/ace_clubs.glb");
-  const ace_diamonds = useLoader(GLTFLoader, "/ace/ace_diamonds.glb");
-  const card_front = useLoader(GLTFLoader, "/ace/card_front.glb");
-  //   const card_back = useLoader(GLTFLoader, "/ace/card_back.glb");
+  function useCard(url, filename) {
+    const material = useLoader(MTLLoader, `${url}/${filename}.mtl`);
+    const object = useLoader(OBJLoader, `${url}/${filename}.obj`, (loader) => {
+      material.preload();
+      loader.setMaterials(material);
+    });
 
-  // initial rotation
-  ace_hearts.scene.children[0].rotation.x += 0.8;
-  ace_spades.scene.children[0].rotation.x += 0.8;
-  ace_clubs.scene.children[0].rotation.x += 0.8;
-  ace_diamonds.scene.children[0].rotation.x += 0.8;
-  card_front.scene.children[0].rotation.x += 0.8;
-  //   card_back.scene.children[0].rotation.x += 0.8;
+    return object;
+  }
+  const ace_hearts = useCard(heartsUrl, "ace_hearts");
+  const ace_spades = useCard(spadesUrl, "ace_spades");
+  const ace_clubs = useCard(clubsUrl, "ace_clubs");
+  const ace_diamonds = useCard(diamondsUrl, "ace_diamonds");
+
+  // const card_back_ob_material = useLoader(MTLLoader, "/ace/card_back.mtl");
+  // const card_back_ob = useLoader(OBJLoader, "/ace/card_back.obj", (loader) => {
+  //   card_back_ob_material.preload();
+  //   loader.setMaterials(card_back_ob_material);
+  // });
 
   const cards = [];
 

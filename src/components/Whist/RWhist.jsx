@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Board from "../common/Board";
 import Participants from "../common/Participants";
-import useDeck from "./useDeck";
+import Deck from "./Cards/Deck";
 
 export default function RWhist() {
   const cards = useSelector((state) => state.cards);
@@ -11,14 +12,29 @@ export default function RWhist() {
 
   const dispatch = useDispatch();
 
-  useDeck(dispatch, cards, game);
+  // useDeck(dispatch, cards, game);
   return (
-    <Participants>
-      <Board>
-        <div className="flex items-center justify-center h-full">
-          <div id="container"></div>
-        </div>
-      </Board>
-    </Participants>
+    // TODO: re-add participants
+    // <Participants>
+    <Board>
+      <div className="flex items-center justify-center h-full">
+        <Canvas
+          style={{ background: "gray" }}
+          camera={{
+            fov: 10,
+            near: 0.1,
+            scale: window.innerWidth / window.innerHeight,
+            far: 1000,
+            position: [0, 0, 100],
+          }}
+        >
+          <ambientLight intensity={1} />
+          <Suspense fallback={null}>
+            <Deck />
+          </Suspense>
+        </Canvas>
+      </div>
+    </Board>
+    // </Participants>
   );
 }
