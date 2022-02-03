@@ -6,6 +6,7 @@ const heartsUrl = "/cards/hearts";
 const clubsUrl = "/cards/clubs";
 const spadesUrl = "/cards/spades";
 const diamondsUrl = "/cards/diamonds";
+const otherUrl = "/cards/other";
 
 export default function useTextures() {
   function useCard(url, filename) {
@@ -17,20 +18,17 @@ export default function useTextures() {
 
     return object;
   }
+
   const ace_hearts = useCard(heartsUrl, "ace_hearts");
   const ace_spades = useCard(spadesUrl, "ace_spades");
   const ace_clubs = useCard(clubsUrl, "ace_clubs");
   const ace_diamonds = useCard(diamondsUrl, "ace_diamonds");
-
-  // const card_back_ob_material = useLoader(MTLLoader, "/ace/card_back.mtl");
-  // const card_back_ob = useLoader(OBJLoader, "/ace/card_back.obj", (loader) => {
-  //   card_back_ob_material.preload();
-  //   loader.setMaterials(card_back_ob_material);
-  // });
+  const card_back = useCard(otherUrl, "card_back");
+  const card_stack = useCard(otherUrl, "card_stack");
 
   const cards = [];
 
   cards.push(ace_hearts, ace_spades, ace_clubs, ace_diamonds);
 
-  return { cards };
+  return { cards, card_stack, card_back };
 }
