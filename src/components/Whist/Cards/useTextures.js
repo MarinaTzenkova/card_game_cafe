@@ -1,6 +1,8 @@
-import { useLoader } from "@react-three/fiber";
+import { useLoader, useThree } from "@react-three/fiber";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
+import { Box3, Group, Scene, Vector3 } from "three";
+import { useEffect, useState } from "react";
 
 const heartsUrl = "/cards/hearts";
 const clubsUrl = "/cards/clubs";
@@ -25,6 +27,32 @@ export default function useTextures() {
   const ace_diamonds = useCard(diamondsUrl, "ace_diamonds");
   const card_back = useCard(otherUrl, "card_back");
   const card_stack = useCard(otherUrl, "card_stack");
+
+  // useEffect(() => {
+  //   if (!centered) {
+  //     scene.traverse((child) => {
+  //       if (child.type === "Group" && child.parent.type === "Scene") {
+  //         var box = new Box3().setFromObject(child);
+  //         var tempCenter = new Vector3();
+  //         box.getCenter(tempCenter);
+  //         console.log(center, tempCenter);
+  //         setCenter(tempCenter);
+  //         // ace_hearts.position.sub(center);
+  //       }
+  //     });
+  //     // var box = new Box3().setFromObject(scene);
+  //     // var center = new Vector3();
+  //     // box.getCenter(center);
+  //     // console.log(center);
+  //     // const geometry = scene.geometry;
+  //     // geometry.computeBoundingBox();
+  //     // geometry.boundingBox.getCenter(center);
+  //     // ace_hearts.position.sub(center);
+  //     // console.log(center, geometry, geometry.boundingBox);
+  //     setCentered(true);
+  //     console.log(ace_hearts.position);
+  //   }
+  // }, []);
 
   const cards = [];
 

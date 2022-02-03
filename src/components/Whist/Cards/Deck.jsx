@@ -4,11 +4,12 @@ import useTextures from "./useTextures";
 
 import Spinner from "../../common/Spinner";
 import useReactGesture from "./useDrag";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGesture } from "react-use-gesture";
 import { useThree } from "@react-three/fiber";
 
 export default function Deck() {
+  const groupRef = useRef(null);
   const { gl, camera } = useThree();
   useEffect(() => {
     function handleResize() {
@@ -17,7 +18,6 @@ export default function Deck() {
       const height = canvas.clientHeight;
 
       if (canvas.width !== width || canvas.height !== height) {
-        console.log(width, height, canvas, width / height);
         // you must pass false here or three.js sadly fights the browser
         gl.setSize(width, height, false);
         camera.aspect = width / height;
@@ -37,7 +37,7 @@ export default function Deck() {
   if (props.length === 0) return <Spinner />;
 
   return (
-    <group dispose={null}>
+    <group ref={groupRef} dispose={null}>
       {isOpen ? (
         props.map(({ scale, position, rotation }, i) => (
           <a.mesh
@@ -47,11 +47,7 @@ export default function Deck() {
             rotation={rotation}
             {...bind(i)}
           >
-            <primitive
-              object={cards[i]}
-              scale={cardScale}
-              position={[0, 0, i]}
-            />
+            <primitive object={cards[i]} position={[0, 0, i]} />
           </a.mesh>
         ))
       ) : (

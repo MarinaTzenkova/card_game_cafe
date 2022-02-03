@@ -1,45 +1,107 @@
 import { useSprings } from "@react-spring/core";
 import { useThree } from "@react-three/fiber";
-import { useDrag } from "react-use-gesture";
-import { Vector3 } from "three";
+import { useEffect, useState } from "react";
+import { useGesture } from "react-use-gesture";
+import { Box3, Vector3 } from "three";
 
 export default function useReactGesture(textures) {
   const scale = new Vector3(0.2, 0.2, 0.2);
+  const { scene } = useThree();
 
-  const { size, viewport } = useThree();
+  const [position, setPosition] = useState({});
 
-  const to = (i) => ({
-    x: 0,
-    y: 0,
-    scale: [1, 1, 1],
-    position: [0, 0, 0],
-    rotation: [0, 0, 0],
-    config: { friction: 10 },
-  });
-  const from = (i) => ({
-    x: 0,
-    y: 0,
-    scale: [1, 1, 1],
-    position: [0, 0, 0],
-    rotation: [0, 0, 0],
-    config: { friction: 50 },
-  });
+  const { size, viewport, gl } = useThree();
+
+  function loadCenter() {
+    var center = new Vector3();
+    console.log(scene);
+    scene.traverse((child) => {
+      if (child.type === "Group" && child.parent.type === "Scene") {
+        var box = new Box3().setFromObject(child);
+        center = new Vector3();
+        box.getCenter(center);
+        console.log(center, child);
+        // ace_hearts.position.sub(center);
+      }
+    });
+
+    return center;
+  }
+
+  // const to = (i) => ({
+  //   x: 0,
+  //   y: 0,
+  //   scale: new Vector3(0.2, 0.2, 0.2),
+  //   position: center,
+  //   rotation: [0, 0, 0],
+  //   config: { friction: 10 },
+  // });
+  const from = (i) => {
+    return {
+      x: 0,
+      y: 0,
+      scale: new Vector3(0.2, 0.2, 0.2),
+      position: [0, 0, 0],
+      rotation: [0, 0, 0],
+      config: { friction: 50 },
+    };
+  };
 
   const aspect = size.width / viewport.width;
 
   const [props, set] = useSprings(textures.length, (i) => ({
-    ...to(i),
+    // ...to(i),
     from: from(i),
   }));
 
-  const bind = useDrag(({ args: [index], movement: [x, y] }) => {
-    set((i) => {
-      if (index !== i) return;
-      return {
-        position: [x / aspect, -y / aspect, 0],
-      };
-    });
-  });
+  const bind = useGesture(
+    {
+      onDrag: ({ args: [index], movement: [x, y] }) => {
+        set.start((i) => {
+          if (index !== i) return;
+          const previousPosition = position[index];
 
-  return { props, bind, scale };
+          const newX = x / aspect;
+          const newY = -y / aspect;
+
+          console.log(previousPosition[0] + newX);
+
+          return {
+            position: [
+              previousPosition[0] + newX,
+              previousPosition[1] + newY,
+              0,
+            ],
+          };
+        });
+      },
+      onDragEnd: ({ args: [index], movement: [x, y] }) => {
+        setPosition((oldPosition) => {
+          const newX = x / aspect;
+          const newY = -y / aspect;
+          return {
+            ...oldPosition,
+            [index]: [
+              oldPosition[index][0] + newX,
+              oldPosition[index][1] + newY,
+              0,
+            ],
+          };
+        });
+      },
+    },
+    {
+      drag: { bounds: { left: -50, right: 200, top: -100, bottom: 100 } },
+    }
+  );
+
+  useEffect(() => {
+    if (Object.keys(position).length === 0) {
+      props.forEach((spring, _index) => {
+        setPosition((oldPos) => ({ ...oldPos, [_index]: [0, 0, 0] }));
+      });
+    }
+  }, [props, position]);
+
+  return { props, bind, scale, position, setPosition };
 }

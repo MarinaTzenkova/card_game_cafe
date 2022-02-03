@@ -19,12 +19,12 @@ export default function RWhist() {
     <Board>
       <div className="flex items-center justify-center h-full">
         <Canvas
-          style={{ background: "gray" }}
+          style={{ width: "800px", height: "300px" }}
           camera={{
             fov: 10,
             near: 0.1,
             scale: window.innerWidth / window.innerHeight,
-            far: 1000,
+            far: 200,
             position: [0, 0, 100],
           }}
         >
