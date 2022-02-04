@@ -49,7 +49,7 @@ export default function Participants({ children }) {
   const [participantPositions, setParticipants] = useState([]);
   const game = useSelector((state) => state.game);
   useEffect(() => {
-    if (!game.participants.length === 0) {
+    if (game.participants.length === 0) {
       dispatch(loadGame());
     }
     if (game.hasStarted) {

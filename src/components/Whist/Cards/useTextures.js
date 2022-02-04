@@ -1,62 +1,42 @@
-import { useLoader, useThree } from "@react-three/fiber";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
-import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
-import { Box3, Group, Scene, Vector3 } from "three";
-import { useEffect, useState } from "react";
-
-const heartsUrl = "/cards/hearts";
-const clubsUrl = "/cards/clubs";
-const spadesUrl = "/cards/spades";
-const diamondsUrl = "/cards/diamonds";
-const otherUrl = "/cards/other";
+import { useLoader } from "@react-three/fiber";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
+import { Box3, Vector3 } from "three";
+import { useEffect } from "react";
 
 export default function useTextures() {
-  function useCard(url, filename) {
-    const material = useLoader(MTLLoader, `${url}/${filename}.mtl`);
-    const object = useLoader(OBJLoader, `${url}/${filename}.obj`, (loader) => {
-      material.preload();
-      loader.setMaterials(material);
-    });
+  const ace_hearts_fbx = useLoader(FBXLoader, "/cards/ace_hearts.fbx");
+  const ace_spades_fbx = useLoader(FBXLoader, "/cards/ace_spades.fbx");
+  const ace_clubs_fbx = useLoader(FBXLoader, "/cards/ace_clubs.fbx");
+  const ace_diamonds_fbx = useLoader(FBXLoader, "/cards/ace_diamonds.fbx");
+  const card_back_fbx = useLoader(FBXLoader, "/cards/card_back.fbx");
+  const card_stack_fbx = useLoader(FBXLoader, "/cards/card_stack.fbx");
 
-    return object;
+  function setCenter(obj, z) {
+    const box = new Box3().setFromObject(obj);
+    const center = box.getCenter(new Vector3());
+
+    obj.position.set(-center.x, -center.y, -center.z + z);
+
+    return center;
   }
 
-  const ace_hearts = useCard(heartsUrl, "ace_hearts");
-  const ace_spades = useCard(spadesUrl, "ace_spades");
-  const ace_clubs = useCard(clubsUrl, "ace_clubs");
-  const ace_diamonds = useCard(diamondsUrl, "ace_diamonds");
-  const card_back = useCard(otherUrl, "card_back");
-  const card_stack = useCard(otherUrl, "card_stack");
-
-  // useEffect(() => {
-  //   if (!centered) {
-  //     scene.traverse((child) => {
-  //       if (child.type === "Group" && child.parent.type === "Scene") {
-  //         var box = new Box3().setFromObject(child);
-  //         var tempCenter = new Vector3();
-  //         box.getCenter(tempCenter);
-  //         console.log(center, tempCenter);
-  //         setCenter(tempCenter);
-  //         // ace_hearts.position.sub(center);
-  //       }
-  //     });
-  //     // var box = new Box3().setFromObject(scene);
-  //     // var center = new Vector3();
-  //     // box.getCenter(center);
-  //     // console.log(center);
-  //     // const geometry = scene.geometry;
-  //     // geometry.computeBoundingBox();
-  //     // geometry.boundingBox.getCenter(center);
-  //     // ace_hearts.position.sub(center);
-  //     // console.log(center, geometry, geometry.boundingBox);
-  //     setCentered(true);
-  //     console.log(ace_hearts.position);
-  //   }
-  // }, []);
+  useEffect(() => {
+    setCenter(ace_hearts_fbx, 3);
+    setCenter(ace_spades_fbx, 8);
+    setCenter(ace_clubs_fbx, 11);
+    setCenter(ace_diamonds_fbx, 14);
+    setCenter(card_back_fbx, 14);
+    setCenter(card_stack_fbx, 1);
+  }, []);
 
   const cards = [];
 
-  cards.push(ace_hearts, ace_spades, ace_clubs, ace_diamonds);
+  cards.push(ace_hearts_fbx, ace_spades_fbx, ace_clubs_fbx, ace_diamonds_fbx);
 
-  return { cards, card_stack, card_back };
+  return {
+    cards,
+    card_stack: card_stack_fbx,
+    card_back: card_back_fbx,
+    ace_hearts_fbx,
+  };
 }

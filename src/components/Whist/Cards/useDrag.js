@@ -2,45 +2,20 @@ import { useSprings } from "@react-spring/core";
 import { useThree } from "@react-three/fiber";
 import { useEffect, useState } from "react";
 import { useGesture } from "react-use-gesture";
-import { Box3, Vector3 } from "three";
+import { Vector3 } from "three";
 
 export default function useReactGesture(textures) {
-  const scale = new Vector3(0.2, 0.2, 0.2);
-  const { scene } = useThree();
+  const scale = new Vector3(0.05, 0.05, 0.05);
 
   const [position, setPosition] = useState({});
 
-  const { size, viewport, gl } = useThree();
+  const { size, viewport } = useThree();
 
-  function loadCenter() {
-    var center = new Vector3();
-    console.log(scene);
-    scene.traverse((child) => {
-      if (child.type === "Group" && child.parent.type === "Scene") {
-        var box = new Box3().setFromObject(child);
-        center = new Vector3();
-        box.getCenter(center);
-        console.log(center, child);
-        // ace_hearts.position.sub(center);
-      }
-    });
-
-    return center;
-  }
-
-  // const to = (i) => ({
-  //   x: 0,
-  //   y: 0,
-  //   scale: new Vector3(0.2, 0.2, 0.2),
-  //   position: center,
-  //   rotation: [0, 0, 0],
-  //   config: { friction: 10 },
-  // });
   const from = (i) => {
     return {
       x: 0,
       y: 0,
-      scale: new Vector3(0.2, 0.2, 0.2),
+      scale: new Vector3(0.05, 0.05, 0.05),
       position: [0, 0, 0],
       rotation: [0, 0, 0],
       config: { friction: 50 },
@@ -50,7 +25,6 @@ export default function useReactGesture(textures) {
   const aspect = size.width / viewport.width;
 
   const [props, set] = useSprings(textures.length, (i) => ({
-    // ...to(i),
     from: from(i),
   }));
 
@@ -63,8 +37,6 @@ export default function useReactGesture(textures) {
 
           const newX = x / aspect;
           const newY = -y / aspect;
-
-          console.log(previousPosition[0] + newX);
 
           return {
             position: [

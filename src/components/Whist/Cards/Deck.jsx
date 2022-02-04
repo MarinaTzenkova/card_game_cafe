@@ -27,7 +27,7 @@ export default function Deck() {
     window.addEventListener("resize", handleResize);
   }, []);
   const [isOpen, setIsOpen] = useState(false);
-  const { cards, card_back, card_stack } = useTextures();
+  const { cards, card_back, card_stack, ace_hearts_fbx } = useTextures();
   const { props, bind, scale: cardScale } = useReactGesture(cards);
 
   const deckBind = useGesture({
@@ -39,15 +39,15 @@ export default function Deck() {
   return (
     <group ref={groupRef} dispose={null}>
       {isOpen ? (
-        props.map(({ scale, position, rotation }, i) => (
+        props.map(({ scale, rotation, position }, i) => (
           <a.mesh
             key={i}
             scale={scale}
-            position={position}
             rotation={rotation}
+            position={position}
             {...bind(i)}
           >
-            <primitive object={cards[i]} position={[0, 0, i]} />
+            <primitive object={cards[i]} />
           </a.mesh>
         ))
       ) : (
