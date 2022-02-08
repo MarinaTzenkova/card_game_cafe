@@ -368,8 +368,10 @@ const cards = [
 const game = {
   amountOfParticipants: 0,
   participants: [],
-  score: [],
   hasStarted: false,
+  mode: "1-8-1",
+  currentRound: 0,
+  scores: {},
 };
 
 const profile = {

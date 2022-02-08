@@ -14,7 +14,6 @@ export default function handReducer(state = initialState.cards, action) {
 }
 
 function sortSlice(arr, amountOfPlayers) {
-  console.log(amountOfPlayers);
   const spades = temp(arr, 0, amountOfPlayers);
   const hearts = temp(arr, 1, amountOfPlayers);
   const diamonds = temp(arr, 2, amountOfPlayers);

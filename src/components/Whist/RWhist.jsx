@@ -1,8 +1,8 @@
-import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Board from "../common/Board";
 import Participants from "../common/Participants";
+import Scoreboard from "../Scoreboard/Scoreboard";
 import useDeck from "./useDeck";
 
 export default function RWhist() {
@@ -11,14 +11,28 @@ export default function RWhist() {
 
   const dispatch = useDispatch();
 
-  useDeck(dispatch, cards, game);
+  const { deal } = useDeck(dispatch, cards, game);
+
+  function handleClick() {}
+
   return (
-    <Participants>
-      <Board>
-        <div className="flex items-center justify-center h-full">
-          <div id="container"></div>
-        </div>
-      </Board>
-    </Participants>
+    <>
+      <Scoreboard />
+      <Participants>
+        <Board>
+          <div className="flex flex-row">
+            <div
+              className="bg-white text-black px-3 py-1 rounded cursor-pointer"
+              onClick={() => deal()}
+            >
+              Deal
+            </div>
+          </div>
+          <div className="flex items-center justify-center h-full">
+            <div id="container"></div>
+          </div>
+        </Board>
+      </Participants>
+    </>
   );
 }

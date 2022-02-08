@@ -370,14 +370,468 @@
     "email": "example@mail.com"
   },
   "game": {
-    "amountOfParticipants": 4,
+    "amountOfParticipants": 3,
     "participants": {
-      "1": "",
-      "2": "",
-      "3": "",
-      "4": ""
+      "0": "mara",
+      "1": "sunca",
+      "2": "salam",
+      "3": ""
     },
-    "score": [],
-    "hasStarted": true
+    "hasStarted": true,
+    "mode": "1-8-1",
+    "currentRound": 0,
+    "scores": {
+      "0": [
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 2,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 3,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 4,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 5,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 6,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 7,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 2,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 3,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 4,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 5,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 6,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 7,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        }
+      ],
+      "1": [
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 2,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 3,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 4,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 5,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 6,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 7,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 2,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 3,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 4,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 5,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 6,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 7,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        }
+      ],
+      "2": [
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 2,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 3,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 4,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 5,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 6,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 7,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 2,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 3,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 4,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 5,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 6,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 7,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        }
+      ],
+      "3": [
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 2,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 3,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 4,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 5,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 6,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 7,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 8,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 2,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 3,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 4,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 5,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 6,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 7,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        },
+        {
+          "column": 1,
+          "called": null,
+          "score": 0
+        }
+      ]
+    },
+    "columns": [
+      1,
+      1,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      8,
+      8,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      1,
+      1,
+      1
+    ]
   }
 }

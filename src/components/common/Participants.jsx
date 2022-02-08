@@ -58,7 +58,11 @@ export default function Participants({ children }) {
         const predefinedPositions = positions[game.amountOfParticipants];
 
         predefinedPositions.forEach((position, _index) => {
-          temp.push({ position, id: _index + 1 });
+          temp.push({
+            position,
+            id: _index + 1,
+            name: game.participants[_index],
+          });
         });
 
         return temp;
@@ -69,14 +73,14 @@ export default function Participants({ children }) {
   if (participantPositions.length === 0) return <Spinner />;
 
   return (
-    <div className=" w-3/4 h-5/6 mx-auto flex items-center justify-center relative my-10">
+    <div className="w-3/4 h-5/6 mx-auto flex items-center justify-center relative my-10">
       {participantPositions.map((participant) => (
         <div
           className={` ${participant.position} ${staticClass}`}
           key={participant.id}
         >
           <img src="/images/user_icon.png" alt="user" />
-          {participant.id}
+          {participant.name}
         </div>
       ))}
       <div className="bg-blue-300 w-full h-full">{children}</div>
