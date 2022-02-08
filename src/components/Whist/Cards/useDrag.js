@@ -5,7 +5,7 @@ import { useGesture } from "react-use-gesture";
 import { Vector3 } from "three";
 
 export default function useReactGesture(textures) {
-  const scale = new Vector3(0.05, 0.05, 0.05);
+  const scale = new Vector3(0.03, 0.03, 0.03);
 
   const [position, setPosition] = useState({});
 
@@ -15,7 +15,7 @@ export default function useReactGesture(textures) {
     return {
       x: 0,
       y: 0,
-      scale: new Vector3(0.05, 0.05, 0.05),
+      scale: new Vector3(0.03, 0.03, 0.03),
       position: [0, 0, 0],
       rotation: [0, 0, 0],
       config: { friction: 50 },
@@ -63,7 +63,7 @@ export default function useReactGesture(textures) {
       },
     },
     {
-      drag: { bounds: { left: -50, right: 200, top: -100, bottom: 100 } },
+      drag: { bounds: { left: -200, right: 200, top: -250, bottom: 250 } },
     }
   );
 

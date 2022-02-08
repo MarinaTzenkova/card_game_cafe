@@ -1,9 +1,11 @@
 import { Canvas } from "@react-three/fiber";
-import { Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Board from "../common/Board";
 import Participants from "../common/Participants";
+import useDeck from "./useDeck";
+import canvasSize from "../constants";
+import { Suspense } from "react";
 import Deck from "./Cards/Deck";
 
 export default function RWhist() {
@@ -12,13 +14,13 @@ export default function RWhist() {
 
   const dispatch = useDispatch();
 
-  // useDeck(dispatch, cards, game);
+  useDeck(dispatch, cards, game);
   return (
     <Participants>
       <Board>
         <div className="flex items-center justify-center h-full">
           <Canvas
-            style={{ width: "800px", height: "300px" }}
+            style={{ width: canvasSize.width, height: canvasSize.height }}
             camera={{
               fov: 10,
               near: 0.1,

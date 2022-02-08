@@ -27,7 +27,7 @@ export default function Deck() {
     window.addEventListener("resize", handleResize);
   }, []);
   const [isOpen, setIsOpen] = useState(false);
-  const { cards, card_back, card_stack, ace_hearts_fbx } = useTextures();
+  const { cards, card_back, card_stack } = useTextures();
   const { props, bind, scale: cardScale } = useReactGesture(cards);
 
   const deckBind = useGesture({
