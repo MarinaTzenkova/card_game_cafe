@@ -1,40 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { animated, useSpring } from "react-spring";
 import { useGesture } from "react-use-gesture";
 
-export default function Dragable({ children }) {
-  const [position, setPosition] = useState([0, 0]);
-  const [{ xy }, set] = useSpring(() => ({ xy: [0, 0] }));
+export default function Dragable({ children, initial }) {
+  const [position, setPosition] = useState([-initial.x, -initial.y]);
+  const [{ xy }, set] = useSpring(() => ({ xy: [-initial.x, -initial.y] }));
+  const bind = useGesture(
+    {
+      onDrag: ({ movement: [x, y] }) => {
+        set.start(() => {
+          const previouxX = x + position[0];
+          const previouxY = y + position[1];
 
-  const bind = useGesture({
-    onDrag: ({ movement: [x, y] }) => {
-      set.start(() => {
-        const previouxX = x + position[0];
-        const previouxY = y + position[1];
+          const final = [previouxX, previouxY];
 
-        const final = [previouxX, previouxY];
+          return { xy: final };
+        });
+      },
+      onDragEnd: ({ movement: [x, y] }) => {
+        const previousX = x + position[0];
+        const previousY = y + position[1];
+        const final = [previousX, previousY];
 
-        return { xy: final };
-      });
+        setPosition(final);
+      },
     },
-    onDragEnd: ({ movement: [x, y] }) => {
-      const previousX = x + position[0];
-      const previousY = y + position[1];
-      const final = [previousX, previousY];
+    {
+      drag: { bounds: { left: -200, right: 200, top: -250, bottom: 250 } },
+    }
+  );
 
-      setPosition(final);
-    },
-  });
+  useEffect(() => {
+    // console.log(initial);
+    setPosition([-initial.x, -initial.y]);
+    set.start({ xy: [-initial.x, -initial.y] });
+  }, [initial]);
 
   return (
     <animated.div
       {...bind()}
+      className="absolute"
       style={{
         transform: xy.to((x, y) => `translate3d(${x}px, ${y}px, 0)`),
         touchAction: "none",
       }}
     >
-      {animated(children)}
+      {children}
     </animated.div>
   );
 }

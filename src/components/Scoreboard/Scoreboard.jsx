@@ -5,6 +5,7 @@ import Spinner from "../common/Spinner";
 const DEFAULT_SCORES = [2, 3, 4, 5, 6, 7];
 
 export default function Scoreboard() {
+  const [collapse, setCollapse] = useState(false);
   const [cols, setCols] = useState([]);
   const game = useSelector((state) => state.game);
 
@@ -47,38 +48,45 @@ export default function Scoreboard() {
   if (!game.hasStarted) return <Spinner />;
   return (
     <div className="relative">
-      <div className="border-2 border-gray-700 bg-white absolute left-0 overflow-auto rounded-md">
-        Scoreboard
-        <div className="flex flex-row w-full">
-          <div className="pr-3">
-            <div className="h-6"></div>
-            {cols.map((col, _index) => (
-              <div key={_index}>{col}</div>
-            ))}
-          </div>
-          <div className="flex flex-row">
-            {/* <div className="w-6"></div> */}
-            {Object.values(game.participants).map((participant, _i) => (
-              <div key={_i}>
-                <span className="px-5">{participant}</span>
-                <div className="flex flex-col">
-                  {Object.keys(scores).length !== 0
-                    ? scores[_i].map((score, index) =>
-                        score.called ? (
-                          <div key={index} className="px-6">
-                            {score.score} | {score.called}
-                          </div>
-                        ) : (
-                          ""
-                        )
-                      )
-                    : ""}
-                </div>
-              </div>
-            ))}
-          </div>
+      <div onClick={() => setCollapse(!collapse)}>
+        <div className="bg-white px-2 w-min rounded-md cursor-pointer">
+          Scoreboard
         </div>
       </div>
+      {collapse ? (
+        <div className="border-2 border-gray-700 bg-white absolute left-0 overflow-auto rounded-md z-10">
+          <div className="flex flex-row w-full">
+            <div className="pr-3 border-r-2 ml-2">
+              <div className="h-6"></div>
+              {cols.map((col, _index) => (
+                <div key={_index}>{col}</div>
+              ))}
+            </div>
+            <div className="flex flex-row">
+              {Object.values(game.participants).map((participant, _i) => (
+                <div className="border-r-2" key={_i}>
+                  <span className="px-5 border-b-2">{participant}</span>
+                  <div className="flex flex-col">
+                    {Object.keys(scores).length !== 0
+                      ? scores[_i].map((score, index) =>
+                          score.called ? (
+                            <div key={index} className="px-6">
+                              {score.score} | {score.called}
+                            </div>
+                          ) : (
+                            ""
+                          )
+                        )
+                      : ""}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

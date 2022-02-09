@@ -16,6 +16,37 @@ const cardFront = (suit, rank) => (
 
 export default function useCards(dispatch, cards, game) {
   const [deck, setDeck] = useState([]);
+
+  function deal() {
+    // get scoreboard of current player
+    const scores = game.scores[0];
+    const currentRound = scores[game.currentRound];
+    [...Array(currentRound)].forEach(() => {
+      [...Array(game.amountOfParticipants)].forEach((participant, _index) => {
+        const reverseIndex = deck.length - 1 - _index;
+        const toMove = deck[reverseIndex];
+
+        const toUpdate = {
+          ...toMove,
+          transform: `translate(${toMove.initial.x + 100}px, ${
+            toMove.initial.y + 100
+          }px)`,
+          initial: {
+            x: toMove.initial.x + 100,
+            y: toMove.initial.y + 100,
+          },
+        };
+
+        setDeck((oldDeck) =>
+          oldDeck.map((card, i) => {
+            const toInclude = i === reverseIndex ? toUpdate : card;
+            return toInclude;
+          })
+        );
+      });
+    });
+  }
+
   useEffect(() => {
     dispatch(loadGame());
 
@@ -43,6 +74,7 @@ export default function useCards(dispatch, cards, game) {
             front: cardFront(card.suitName, card.rankValue),
             card,
             transform: `translate(-${z}px, -${z}px)`,
+            initial: { x: z, y: z },
           };
         });
 
@@ -51,7 +83,7 @@ export default function useCards(dispatch, cards, game) {
     }
   }, [cards, game.amountOfParticipants]);
 
-  return { deck };
+  return { deck, deal };
 }
 
 function shuffle(array) {

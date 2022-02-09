@@ -18,6 +18,7 @@ export default function prepareGame(game, players, participants) {
     hasStarted: true,
     scores,
     columns,
+    currentRound: 0,
   };
 
   return newGame;

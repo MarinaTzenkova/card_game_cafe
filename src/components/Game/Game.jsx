@@ -33,7 +33,7 @@ export default function Game() {
     [...Array(newVal)].forEach((player, _index) => {
       setParticipantNames((previousParticipants) => ({
         ...previousParticipants,
-        [_index + 1]: "",
+        [_index]: "",
       }));
       setErrors((oldErrors) => ({ ...oldErrors, [_index]: true }));
     });
@@ -44,7 +44,7 @@ export default function Game() {
     [...Array(3)].forEach((player, _index) => {
       setParticipantNames((previousParticipants) => ({
         ...previousParticipants,
-        [_index + 1]: "",
+        [_index]: "",
       }));
       setErrors((oldErrors) => ({ ...oldErrors, [_index]: true }));
     });
