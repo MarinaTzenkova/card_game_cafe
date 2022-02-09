@@ -78,6 +78,7 @@ export default function Participants({ children }) {
         <div
           className={` ${participant.position} ${staticClass}`}
           key={participant.id}
+          id={`participant-${participant.id}`}
         >
           <img src="/images/user_icon.png" alt="user" />
           {participant.name}
