@@ -1,18 +1,18 @@
-import { fetchGame, setPlayers } from "../../../../api/whist/whistGameService";
 import { gameActionTypes } from "../../types";
+import * as gameService from "../../../../api/whist/game";
 
 export function loadGame() {
   return function (dispatch) {
-    return fetchGame().then((game) => {
+    return gameService.fetchGame().then((game) => {
       dispatch(loadGameSuccess(game));
     });
   };
 }
 
-export function updatePlayers(game) {
+export function updateGame(game) {
   return function (dispatch) {
-    return setPlayers(game).then((newGame) => {
-      dispatch(setGameSuccess(newGame));
+    return gameService.setGame(game).then((newGame) => {
+      dispatch(updateGameSuccess(newGame));
     });
   };
 }
@@ -21,6 +21,6 @@ export function loadGameSuccess(game) {
   return { type: gameActionTypes.LOAD_GAME_SUCCESS, game };
 }
 
-export function setGameSuccess(game) {
+export function updateGameSuccess(game) {
   return { type: gameActionTypes.UPDATE_GAME_SUCCESS, game };
 }

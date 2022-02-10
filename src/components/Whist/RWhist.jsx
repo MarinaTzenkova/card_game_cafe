@@ -5,21 +5,33 @@ import Participants from "../common/Participants";
 import Scoreboard from "../Scoreboard/Scoreboard";
 import useCards from "./useCards";
 import Dragable from "./Dragable.jsx";
+import { useEffect } from "react";
+import { loadGame } from "../../store/whist/actions/game";
+import { setDeck } from "../../store/whist/actions/deck";
 
 export default function RWhist() {
-  const cards = useSelector((state) => state.cards);
+  const deck = useSelector((state) => state.deck);
   const game = useSelector((state) => state.game);
-
   const dispatch = useDispatch();
 
-  const { deck, deal } = useCards(dispatch, cards, game);
+  // const { cards, deal } = useCards(dispatch, deck, game);
+
+  useEffect(() => {
+    if (!game.hasStarted) {
+      dispatch(loadGame()).finally(() => {
+        console.log(game);
+        console.log("test");
+        dispatch(setDeck(game.id, game.amountOfParticipants));
+      });
+    }
+  }, [game]);
 
   return (
     <>
       <Scoreboard />
       <Participants>
         <Board>
-          <div
+          {/* <div
             onClick={() => deal()}
             className="bg-white w-min rounded-md px-2 py-1"
           >
@@ -27,7 +39,7 @@ export default function RWhist() {
           </div>
           <div className="flex items-center justify-center h-full relative">
             <div className="absolute top-0 right-0">
-              {deck.map((card, index) => (
+              {cards.map((card, index) => (
                 // Enable dragging after cards are dealt
                 <Dragable
                   key={index}
@@ -38,7 +50,7 @@ export default function RWhist() {
                 </Dragable>
               ))}
             </div>
-          </div>
+          </div> */}
         </Board>
       </Participants>
     </>

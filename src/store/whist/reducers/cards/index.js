@@ -1,13 +1,15 @@
 import { cardsActionTypes } from "../../types";
 import initialState from "../initialState";
 
-export default function handReducer(state = initialState.cards, action) {
+export default function handReducer(state = initialState.deck, action) {
   switch (action.type) {
     case cardsActionTypes.LOAD_CARDS_SUCCESS:
       return {
         ...sortSlice(action.cards, action.amountOfPlayers),
         amountOfParticipants: action.amountOfPlayers,
       };
+    case cardsActionTypes.LOAD_DECK_SUCCESS:
+      return action.deck;
     default:
       return state;
   }
