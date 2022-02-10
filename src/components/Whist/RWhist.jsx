@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Board from "../common/Board";
 import Participants from "../common/Participants";
@@ -12,9 +11,9 @@ export default function RWhist() {
   const game = useSelector((state) => state.game);
   const scores = useSelector((state) => state.scores);
   const participants = useSelector((state) => state.participants);
-  const dispatch = useDispatch();
+  const player = useSelector((state) => state.player);
 
-  const { cards, deal } = useCards(dispatch, deck, game, scores, participants);
+  const { cards, deal } = useCards(deck, game, scores, participants, player);
 
   return (
     <GameData>

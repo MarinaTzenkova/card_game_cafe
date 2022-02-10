@@ -5,6 +5,7 @@ import { loadDeck } from "../../store/whist/actions/deck";
 import { loadGame } from "../../store/whist/actions/game";
 import { loadScores } from "../../store/whist/actions/scores";
 import { loadParticipants } from "../../store/whist/actions/participants";
+import { loadPlayer } from "../../store/whist/actions/player";
 import Spinner from "../common/Spinner";
 
 export default function GameData({ children }) {
@@ -29,6 +30,8 @@ export default function GameData({ children }) {
       if (Object.keys(scores).length === 0) {
         dispatch(loadScores(game.id));
       }
+
+      dispatch(loadPlayer());
     }
 
     if (

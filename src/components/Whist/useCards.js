@@ -23,12 +23,12 @@ function getOffset(el) {
   return { top: _y, left: _x };
 }
 
-export default function useCards(dispatch, deck, game, scores, participants) {
+export default function useCards(deck, game, scores, participants, player) {
   const [cards, setCards] = useState([]);
 
   function deal() {
     // get scoreboard of current player
-    const currentRound = scores[0][game.currentRound];
+    const currentRound = scores[player.id][game.currentRound];
     [...Array(currentRound)].forEach(() => {
       participants.forEach((participant) => {
         const participantPosition = document.getElementById(
@@ -50,15 +50,12 @@ export default function useCards(dispatch, deck, game, scores, participants) {
             x: offetX,
             y: offetY,
           },
-          dragable: true,
+          dragable: game.currentPlayer === participant.id ? true : false,
         };
 
         setCards((oldDeck) =>
           oldDeck.map((card, i) => {
             const toInclude = i === reverseIndex ? toUpdate : card;
-            if (i === reverseIndex) {
-              console.log(toInclude);
-            }
             return toInclude;
           })
         );

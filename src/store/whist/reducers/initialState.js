@@ -10,4 +10,8 @@ export default {
   participants: [],
   deck: [],
   scores: {},
+  player: {
+    name: "",
+    id: -1,
+  },
 };
