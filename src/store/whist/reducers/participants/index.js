@@ -8,6 +8,8 @@ export default function participantsReducer(
   switch (action.type) {
     case gameActionTypes.SET_PARTICIPANTS_SUCCESS:
       return action.participants;
+    case gameActionTypes.LOAD_PARTICIPANTS_SUCCESS:
+      return action.participants;
     default:
       return state;
   }

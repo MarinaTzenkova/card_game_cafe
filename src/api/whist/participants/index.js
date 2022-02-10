@@ -8,8 +8,8 @@ const baseUrl = "http://localhost:3001/participants";
 // },
 
 export function setParticipants(gameId, players) {
-  const participants = players.map((player, index) => ({
-    name: player.name,
+  const participants = Object.keys(players).map((key, index) => ({
+    name: players[key],
     id: index,
     hand: [],
   }));
@@ -23,8 +23,8 @@ export function setParticipants(gameId, players) {
   });
 }
 
-export function loadParticipants(gameId) {
-  return fetch(baseUrl + `/${gameId}`).then((response) => {
+export function loadParticipants() {
+  return fetch(baseUrl).then((response) => {
     if (response.ok) return response.json();
     throw response;
   });

@@ -7,7 +7,7 @@ export default {
     currentRound: 0,
     currentPlayer: 0,
   },
-  participants: {},
-  deck: {},
+  participants: [],
+  deck: [],
   scores: {},
 };

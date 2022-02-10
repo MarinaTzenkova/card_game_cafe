@@ -21,6 +21,13 @@ export function setScores(gameId, amountOfParticipants, participants) {
   });
 }
 
+export function loadScores() {
+  return fetch(baseUrl).then((response) => {
+    if (response.ok) return response.json();
+    throw response;
+  });
+}
+
 function generateColumns(players) {
   const ones = Array(players).fill(1);
   const eights = Array(players).fill(8);

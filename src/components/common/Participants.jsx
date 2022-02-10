@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { loadGame } from "../../store/whist/actions/game";
-import { loadParticipants } from "../../store/whist/actions/participants";
-import Spinner from "./Spinner";
 const positions = {
   3: ["bottom-0", "left-7 bottom-1/2", "right-7 bottom-1/2"],
   4: ["bottom-0", "left-7 bottom-1/2", "top-0", "right-7 bottom-1/2"],
@@ -51,30 +48,19 @@ export default function Participants({ children }) {
   const game = useSelector((state) => state.game);
   const participants = useSelector((state) => state.participants);
   useEffect(() => {
-    if (!game.participants.length === 0) {
-      dispatch(loadGame());
-    }
-    if (game.hasStarted) {
-      dispatch(loadParticipants(game.id)).then(() => {
-        setParticipants(() => {
-          const temp = [];
-          const predefinedPositions = positions[participants.length];
-
-          predefinedPositions.forEach((position, _index) => {
-            temp.push({
-              position,
-              id: _index + 1,
-              name: game.participants[_index],
-            });
-          });
-
-          return temp;
+    setParticipants(() => {
+      const temp = [];
+      const predefinedPositions = positions[participants.length];
+      predefinedPositions.forEach((position, _index) => {
+        temp.push({
+          position,
+          id: participants[_index].id,
+          name: participants[_index].name,
         });
       });
-    }
-  }, [game, dispatch]);
-
-  if (participantPositions.length === 0) return <Spinner />;
+      return temp;
+    });
+  }, [game, dispatch, participants]);
 
   return (
     <div className="w-3/4 h-5/6 mx-auto flex items-center justify-center relative my-10">

@@ -23,23 +23,22 @@ function getOffset(el) {
   return { top: _y, left: _x };
 }
 
-export default function useCards(dispatch, cards, game) {
-  const [deck, setDeck] = useState([]);
+export default function useCards(dispatch, deck, game, scores, participants) {
+  const [cards, setCards] = useState([]);
 
   function deal() {
     // get scoreboard of current player
-    const scores = game.scores[0];
-    const currentRound = scores[game.currentRound];
+    const currentRound = scores[0][game.currentRound];
     [...Array(currentRound)].forEach(() => {
-      [...Array(game.amountOfParticipants)].forEach((participant, _index) => {
+      participants.forEach((participant) => {
         const participantPosition = document.getElementById(
-          `participant-${_index + 1}`
+          `participant-${participant.id}`
         );
 
         const { left, top } = getOffset(participantPosition);
 
-        const reverseIndex = deck.length - 1 - _index;
-        const toMove = deck[reverseIndex];
+        const reverseIndex = cards.length - 1 - participant.id;
+        const toMove = cards[reverseIndex];
 
         const offetX = toMove.initial.x + left / 1.6;
         const offetY = toMove.initial.y - top / 2.2;
@@ -54,9 +53,12 @@ export default function useCards(dispatch, cards, game) {
           dragable: true,
         };
 
-        setDeck((oldDeck) =>
+        setCards((oldDeck) =>
           oldDeck.map((card, i) => {
             const toInclude = i === reverseIndex ? toUpdate : card;
+            if (i === reverseIndex) {
+              console.log(toInclude);
+            }
             return toInclude;
           })
         );
@@ -65,24 +67,21 @@ export default function useCards(dispatch, cards, game) {
   }
 
   useEffect(() => {
-    if (game.hasStarted) {
-      if (cards.length !== 0) {
-        const temp = cards.map((card, index) => {
-          const z = (cards.length - index) / 4;
-          return {
-            back: cardBack,
-            front: cardFront(card.suitName, card.rankValue),
-            card,
-            transform: `translate(-${z}px, -${z}px)`,
-            initial: { x: z, y: z },
-            dragable: false,
-          };
-        });
-
-        setDeck(temp);
-      }
+    if (game.hasStarted && deck.length !== 0) {
+      const temp = deck.map((card, index) => {
+        const z = (deck.length - index) / 4;
+        return {
+          back: cardBack,
+          front: cardFront(card.suitName, card.rankValue),
+          card,
+          transform: `translate(-${z}px, -${z}px)`,
+          initial: { x: z, y: z },
+          dragable: false,
+        };
+      });
+      setCards(temp);
     }
-  }, [cards, game.amountOfParticipants, game.hasStarted]);
+  }, [deck, game.amountOfParticipants, game.hasStarted]);
 
-  return { cards: deck, deal };
+  return { cards, deal };
 }

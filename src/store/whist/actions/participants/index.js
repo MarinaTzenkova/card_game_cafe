@@ -6,15 +6,15 @@ export function setParticipants(gameId, participants) {
     return participantsService
       .setParticipants(gameId, participants)
       .then((newPlayers) => {
-        dispatch(setParticipantsSuccess(newPlayers));
+        dispatch(setParticipantsSuccess(newPlayers[gameId]));
       });
   };
 }
 
 export function loadParticipants(gameId) {
   return function (dispatch) {
-    return participantsService.loadParticipants(gameId).then((participants) => {
-      dispatch(loadParticipantsSuccess(participants));
+    return participantsService.loadParticipants().then((participants) => {
+      dispatch(loadParticipantsSuccess(participants[gameId]));
     });
   };
 }

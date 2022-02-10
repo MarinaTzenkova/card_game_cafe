@@ -4,7 +4,7 @@ import { gameActionTypes } from "../../types";
 export function setDeck(id, players) {
   return function (dispatch) {
     return deckService.setDeck(id, players).then((newDeck) => {
-      dispatch(setDeckSuccess(newDeck));
+      dispatch(setDeckSuccess(newDeck[id]));
     });
   };
 }
@@ -12,7 +12,6 @@ export function setDeck(id, players) {
 export function loadDeck(id) {
   return function (dispatch) {
     return deckService.loadDeck(id).then((deck) => {
-      console.log(deck[id]);
       dispatch(loadDeckSuccess(deck[id]));
     });
   };

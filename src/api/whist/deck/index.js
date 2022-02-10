@@ -3,7 +3,8 @@ import { shuffle, slice } from "../utils";
 
 const baseUrl = "http://localhost:3001/deck";
 
-export function setDeck(id, amountOfPlayers) {
+export function setDeck(id, players) {
+  const amountOfPlayers = Object.keys(players).length;
   const merged = [
     ...slice(cards.spades, amountOfPlayers),
     ...slice(cards.hearts, amountOfPlayers),
@@ -14,7 +15,6 @@ export function setDeck(id, amountOfPlayers) {
   const shuffled = shuffle(merged);
 
   const deck = shuffled.map((card, index) => ({ ...card, dealt: false }));
-
   return fetch(baseUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -26,7 +26,6 @@ export function setDeck(id, amountOfPlayers) {
 }
 
 export function loadDeck(id) {
-  //`/?q=${id}`
   return fetch(baseUrl).then((response) => {
     if (response.ok) return response.json();
     throw response;

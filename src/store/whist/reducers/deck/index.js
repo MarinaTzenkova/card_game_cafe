@@ -6,7 +6,7 @@ export default function deckReducer(state = initialState.deck, action) {
     case gameActionTypes.SET_DECK_SUCCESS:
       return action.deck;
     case gameActionTypes.LOAD_DECK_SUCCESS:
-      return { ...state, ...action.deck };
+      return action.deck;
     default:
       return state;
   }

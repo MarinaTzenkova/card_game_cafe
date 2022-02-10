@@ -1,51 +1,20 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Spinner from "../common/Spinner";
-
-const DEFAULT_SCORES = [2, 3, 4, 5, 6, 7];
 
 export default function Scoreboard() {
   const [collapse, setCollapse] = useState(false);
   const [cols, setCols] = useState([]);
-  const game = useSelector((state) => state.game);
-
-  const [scores, setSocres] = useState({});
-
-  function generateBoardBasedOnMode() {
-    // check, based on mode
-    const mode = game.mode;
-    const amountOfParticipants = game.amountOfParticipants;
-
-    const ones = Array(amountOfParticipants).fill(1);
-    const eights = Array(amountOfParticipants).fill(8);
-
-    const columns = [
-      ...ones,
-      ...DEFAULT_SCORES,
-      ...eights,
-      ...DEFAULT_SCORES,
-      ...ones,
-    ];
-
-    setCols(columns);
-
-    generatePlayerScores();
-  }
-
-  function generatePlayerScores() {
-    Object.keys(game.participants).forEach((key, _index) => {
-      setSocres((oldScore) => ({
-        ...oldScore,
-        [_index]: cols.map((col) => ({ column: col, called: null, score: 0 })),
-      }));
-    });
-  }
+  const participants = useSelector((state) => state.participants);
+  const scores = useSelector((state) => state.scores);
 
   useEffect(() => {
-    generateBoardBasedOnMode();
-  }, [game]);
+    if (Object.keys(scores).length !== 0 && cols.length === 0) {
+      const columns = scores[0];
 
-  if (!game.hasStarted) return <Spinner />;
+      setCols(columns.map((score) => score.column));
+    }
+  }, [scores, cols]);
+
   return (
     <div className="relative">
       <div onClick={() => setCollapse(!collapse)}>
@@ -63,12 +32,12 @@ export default function Scoreboard() {
               ))}
             </div>
             <div className="flex flex-row">
-              {Object.values(game.participants).map((participant, _i) => (
-                <div className="border-r-2" key={_i}>
-                  <span className="px-5 border-b-2">{participant}</span>
+              {participants.map((participant) => (
+                <div className="border-r-2" key={participant.id}>
+                  <span className="px-5 border-b-2">{participant.name}</span>
                   <div className="flex flex-col">
-                    {Object.keys(scores).length !== 0
-                      ? scores[_i].map((score, index) =>
+                    {scores[participant.id].length !== 0
+                      ? scores[participant.id].map((score, index) =>
                           score.called ? (
                             <div key={index} className="px-6">
                               {score.score} | {score.called}
