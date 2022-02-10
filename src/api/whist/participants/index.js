@@ -22,3 +22,10 @@ export function setParticipants(gameId, players) {
     throw response;
   });
 }
+
+export function loadParticipants(gameId) {
+  return fetch(baseUrl + `/${gameId}`).then((response) => {
+    if (response.ok) return response.json();
+    throw response;
+  });
+}

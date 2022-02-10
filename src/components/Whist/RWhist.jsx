@@ -7,7 +7,7 @@ import useCards from "./useCards";
 import Dragable from "./Dragable.jsx";
 import { useEffect } from "react";
 import { loadGame } from "../../store/whist/actions/game";
-import { setDeck } from "../../store/whist/actions/deck";
+import { loadDeck } from "../../store/whist/actions/deck";
 
 export default function RWhist() {
   const deck = useSelector((state) => state.deck);
@@ -18,20 +18,19 @@ export default function RWhist() {
 
   useEffect(() => {
     if (!game.hasStarted) {
-      dispatch(loadGame()).finally(() => {
-        console.log(game);
-        console.log("test");
-        dispatch(setDeck(game.id, game.amountOfParticipants));
-      });
+      dispatch(loadGame());
+      dispatch(loadDeck(game.id));
     }
-  }, [game]);
+  }, [game, dispatch]);
+
+  console.log(deck);
 
   return (
     <>
-      <Scoreboard />
-      <Participants>
-        <Board>
-          {/* <div
+      {/* <Scoreboard /> */}
+      {/* <Participants> */}
+      <Board>
+        {/* <div
             onClick={() => deal()}
             className="bg-white w-min rounded-md px-2 py-1"
           >
@@ -51,8 +50,8 @@ export default function RWhist() {
               ))}
             </div>
           </div> */}
-        </Board>
-      </Participants>
+      </Board>
+      {/* </Participants> */}
     </>
   );
 }

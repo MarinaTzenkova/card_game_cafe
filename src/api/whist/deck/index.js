@@ -24,3 +24,11 @@ export function setDeck(id, amountOfPlayers) {
     throw response;
   });
 }
+
+export function loadDeck(id) {
+  //`/?q=${id}`
+  return fetch(baseUrl).then((response) => {
+    if (response.ok) return response.json();
+    throw response;
+  });
+}

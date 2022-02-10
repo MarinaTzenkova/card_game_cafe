@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { loadGame } from "../../store/whist/actions/game";
+import { loadParticipants } from "../../store/whist/actions/participants";
 import Spinner from "./Spinner";
 const positions = {
   3: ["bottom-0", "left-7 bottom-1/2", "right-7 bottom-1/2"],
@@ -48,24 +49,27 @@ export default function Participants({ children }) {
   const dispatch = useDispatch();
   const [participantPositions, setParticipants] = useState([]);
   const game = useSelector((state) => state.game);
+  const participants = useSelector((state) => state.participants);
   useEffect(() => {
     if (!game.participants.length === 0) {
       dispatch(loadGame());
     }
     if (game.hasStarted) {
-      setParticipants(() => {
-        const temp = [];
-        const predefinedPositions = positions[game.amountOfParticipants];
+      dispatch(loadParticipants(game.id)).then(() => {
+        setParticipants(() => {
+          const temp = [];
+          const predefinedPositions = positions[participants.length];
 
-        predefinedPositions.forEach((position, _index) => {
-          temp.push({
-            position,
-            id: _index + 1,
-            name: game.participants[_index],
+          predefinedPositions.forEach((position, _index) => {
+            temp.push({
+              position,
+              id: _index + 1,
+              name: game.participants[_index],
+            });
           });
-        });
 
-        return temp;
+          return temp;
+        });
       });
     }
   }, [game, dispatch]);

@@ -5,12 +5,8 @@
     "mode": "1-8-1",
     "currentRound": 0,
     "currentPlayer": 0,
-    "amountOfParticipants": 3,
-    "participants": {
-      "0": "dsa",
-      "1": "dafga",
-      "2": "as"
-    },
+    "amountOfParticipants": 0,
+    "participants": [],
     "scores": {
       "0": [
         {
@@ -362,81 +358,15 @@
   "deck": {
     "0": [
       {
-        "suit": 3,
-        "suitName": "clubs",
-        "rank": "Q",
-        "dealt": false
-      },
-      {
-        "suitName": "diamonds",
-        "suit": 2,
-        "rank": 10,
-        "dealt": false
-      },
-      {
-        "suit": 1,
-        "suitName": "hearts",
-        "rank": "K",
-        "dealt": false
-      },
-      {
         "suit": 0,
         "suitName": "spades",
-        "rank": "K",
+        "rank": 4,
         "dealt": false
       },
       {
         "suit": 3,
         "suitName": "clubs",
-        "rank": 10,
-        "dealt": false
-      },
-      {
-        "suitName": "diamonds",
-        "suit": 2,
-        "rank": 4,
-        "dealt": false
-      },
-      {
-        "suit": 1,
-        "suitName": "hearts",
-        "rank": 2,
-        "dealt": false
-      },
-      {
-        "suit": 1,
-        "suitName": "hearts",
         "rank": "Q",
-        "dealt": false
-      },
-      {
-        "suitName": "diamonds",
-        "suit": 2,
-        "rank": 8,
-        "dealt": false
-      },
-      {
-        "suit": 3,
-        "suitName": "clubs",
-        "rank": "K",
-        "dealt": false
-      },
-      {
-        "suit": 3,
-        "suitName": "clubs",
-        "rank": 9,
-        "dealt": false
-      },
-      {
-        "suit": 1,
-        "suitName": "hearts",
-        "rank": 4,
-        "dealt": false
-      },
-      {
-        "suit": 3,
-        "suitName": "clubs",
-        "rank": "A",
         "dealt": false
       },
       {
@@ -448,7 +378,7 @@
       {
         "suit": 1,
         "suitName": "hearts",
-        "rank": 6,
+        "rank": 2,
         "dealt": false
       },
       {
@@ -458,14 +388,110 @@
         "dealt": false
       },
       {
+        "suitName": "diamonds",
+        "suit": 2,
+        "rank": "Q",
+        "dealt": false
+      },
+      {
+        "suit": 1,
+        "suitName": "hearts",
+        "rank": 9,
+        "dealt": false
+      },
+      {
         "suit": 0,
         "suitName": "spades",
+        "rank": "A",
+        "dealt": false
+      },
+      {
+        "suit": 0,
+        "suitName": "spades",
+        "rank": 5,
+        "dealt": false
+      },
+      {
+        "suitName": "diamonds",
+        "suit": 2,
         "rank": 8,
+        "dealt": false
+      },
+      {
+        "suit": 1,
+        "suitName": "hearts",
+        "rank": 4,
+        "dealt": false
+      },
+      {
+        "suit": 0,
+        "suitName": "spades",
+        "rank": "J",
         "dealt": false
       },
       {
         "suit": 3,
         "suitName": "clubs",
+        "rank": "A",
+        "dealt": false
+      },
+      {
+        "suitName": "diamonds",
+        "suit": 2,
+        "rank": 10,
+        "dealt": false
+      },
+      {
+        "suit": 1,
+        "suitName": "hearts",
+        "rank": 6,
+        "dealt": false
+      },
+      {
+        "suitName": "diamonds",
+        "suit": 2,
+        "rank": 4,
+        "dealt": false
+      },
+      {
+        "suitName": "diamonds",
+        "suit": 2,
+        "rank": "J",
+        "dealt": false
+      },
+      {
+        "suit": 3,
+        "suitName": "clubs",
+        "rank": "K",
+        "dealt": false
+      },
+      {
+        "suit": 1,
+        "suitName": "hearts",
+        "rank": "K",
+        "dealt": false
+      },
+      {
+        "suit": 1,
+        "suitName": "hearts",
+        "rank": "J",
+        "dealt": false
+      },
+      {
+        "suit": 0,
+        "suitName": "spades",
+        "rank": 9,
+        "dealt": false
+      },
+      {
+        "suit": 1,
+        "suitName": "hearts",
+        "rank": 8,
+        "dealt": false
+      },
+      {
+        "suit": 1,
+        "suitName": "hearts",
         "rank": 7,
         "dealt": false
       },
@@ -478,49 +504,13 @@
       {
         "suit": 3,
         "suitName": "clubs",
-        "rank": 5,
-        "dealt": false
-      },
-      {
-        "suit": 3,
-        "suitName": "clubs",
-        "rank": 4,
-        "dealt": false
-      },
-      {
-        "suit": 0,
-        "suitName": "spades",
-        "rank": 5,
-        "dealt": false
-      },
-      {
-        "suit": 0,
-        "suitName": "spades",
-        "rank": 4,
-        "dealt": false
-      },
-      {
-        "suit": 3,
-        "suitName": "clubs",
-        "rank": 8,
-        "dealt": false
-      },
-      {
-        "suitName": "diamonds",
-        "suit": 2,
-        "rank": 7,
-        "dealt": false
-      },
-      {
-        "suitName": "diamonds",
-        "suit": 2,
-        "rank": 9,
+        "rank": 3,
         "dealt": false
       },
       {
         "suit": 1,
         "suitName": "hearts",
-        "rank": 9,
+        "rank": 10,
         "dealt": false
       },
       {
@@ -530,15 +520,33 @@
         "dealt": false
       },
       {
-        "suit": 1,
-        "suitName": "hearts",
-        "rank": 7,
+        "suit": 3,
+        "suitName": "clubs",
+        "rank": 10,
+        "dealt": false
+      },
+      {
+        "suit": 3,
+        "suitName": "clubs",
+        "rank": 8,
+        "dealt": false
+      },
+      {
+        "suit": 3,
+        "suitName": "clubs",
+        "rank": 2,
         "dealt": false
       },
       {
         "suitName": "diamonds",
         "suit": 2,
-        "rank": 5,
+        "rank": "A",
+        "dealt": false
+      },
+      {
+        "suit": 0,
+        "suitName": "spades",
+        "rank": 8,
         "dealt": false
       },
       {
@@ -548,33 +556,9 @@
         "dealt": false
       },
       {
-        "suit": 0,
-        "suitName": "spades",
-        "rank": "A",
-        "dealt": false
-      },
-      {
-        "suit": 1,
-        "suitName": "hearts",
-        "rank": 10,
-        "dealt": false
-      },
-      {
         "suitName": "diamonds",
         "suit": 2,
-        "rank": "A",
-        "dealt": false
-      },
-      {
-        "suit": 1,
-        "suitName": "hearts",
         "rank": 5,
-        "dealt": false
-      },
-      {
-        "suitName": "diamonds",
-        "suit": 2,
-        "rank": "J",
         "dealt": false
       },
       {
@@ -584,21 +568,27 @@
         "dealt": false
       },
       {
-        "suit": 0,
-        "suitName": "spades",
+        "suitName": "diamonds",
+        "suit": 2,
         "rank": 6,
         "dealt": false
       },
       {
         "suit": 1,
         "suitName": "hearts",
-        "rank": 8,
+        "rank": "A",
         "dealt": false
       },
       {
-        "suit": 3,
-        "suitName": "clubs",
-        "rank": 3,
+        "suit": 0,
+        "suitName": "spades",
+        "rank": "K",
+        "dealt": false
+      },
+      {
+        "suit": 0,
+        "suitName": "spades",
+        "rank": 6,
         "dealt": false
       },
       {
@@ -608,27 +598,27 @@
         "dealt": false
       },
       {
-        "suit": 3,
-        "suitName": "clubs",
-        "rank": 6,
+        "suit": 1,
+        "suitName": "hearts",
+        "rank": 5,
         "dealt": false
       },
       {
         "suit": 3,
         "suitName": "clubs",
-        "rank": 2,
+        "rank": 9,
         "dealt": false
       },
       {
         "suitName": "diamonds",
         "suit": 2,
-        "rank": 2,
+        "rank": 7,
         "dealt": false
       },
       {
         "suit": 1,
         "suitName": "hearts",
-        "rank": "J",
+        "rank": "Q",
         "dealt": false
       },
       {
@@ -640,19 +630,25 @@
       {
         "suitName": "diamonds",
         "suit": 2,
-        "rank": "Q",
-        "dealt": false
-      },
-      {
-        "suit": 0,
-        "suitName": "spades",
-        "rank": "J",
+        "rank": 9,
         "dealt": false
       },
       {
         "suitName": "diamonds",
         "suit": 2,
-        "rank": 6,
+        "rank": 2,
+        "dealt": false
+      },
+      {
+        "suit": 3,
+        "suitName": "clubs",
+        "rank": 4,
+        "dealt": false
+      },
+      {
+        "suit": 3,
+        "suitName": "clubs",
+        "rank": 7,
         "dealt": false
       },
       {
@@ -662,15 +658,15 @@
         "dealt": false
       },
       {
-        "suit": 0,
-        "suitName": "spades",
-        "rank": 9,
+        "suit": 3,
+        "suitName": "clubs",
+        "rank": 6,
         "dealt": false
       },
       {
-        "suit": 1,
-        "suitName": "hearts",
-        "rank": "A",
+        "suit": 3,
+        "suitName": "clubs",
+        "rank": 5,
         "dealt": false
       }
     ]

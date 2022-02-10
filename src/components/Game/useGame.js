@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { setDeck } from "../../store/whist/actions/deck";
 import { updateGame } from "../../store/whist/actions/game";
+import { setParticipants } from "../../store/whist/actions/participants";
+import { setScores } from "../../store/whist/actions/scores";
 import prepareGame from "./prepareGame";
 
 export default function useGame() {
@@ -53,7 +56,10 @@ export default function useGame() {
   function handleClick() {
     if (!hasErrors) {
       const newGame = prepareGame(game);
-      dispatch(updateGame(newGame)).then(() => {
+      dispatch(updateGame(newGame));
+      dispatch(setParticipants(newGame.id, participantNames));
+      dispatch(setScores(newGame.id, players, participantNames));
+      dispatch(setDeck(newGame.id, participantNames)).then(() => {
         navigate("/game/r-whist");
       });
     }
