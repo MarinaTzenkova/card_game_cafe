@@ -5,6 +5,7 @@ import Scoreboard from "../Scoreboard/Scoreboard";
 import useCards from "./useCards";
 import Dragable from "./Dragable.jsx";
 import GameData from "./GameData";
+import { useDispatch } from "react-redux";
 
 export default function RWhist() {
   const deck = useSelector((state) => state.deck);
@@ -13,20 +14,22 @@ export default function RWhist() {
   const participants = useSelector((state) => state.participants);
   const player = useSelector((state) => state.player);
 
-  const { cards, deal } = useCards(deck, game, scores, participants, player);
+  const dispatch = useDispatch();
+
+  const { cards, setPlaced } = useCards(
+    deck,
+    game,
+    scores,
+    participants,
+    player,
+    dispatch
+  );
 
   return (
     <GameData>
       <Scoreboard />
       <Participants>
         <Board>
-          <div
-            onClick={() => deal()}
-            className="bg-white w-min rounded-md px-2 py-1"
-          >
-            Deal
-          </div>
-
           <div className="flex items-center justify-center h-full relative">
             <div className="absolute top-0 right-0">
               {cards.map((card, index) => (
@@ -35,6 +38,7 @@ export default function RWhist() {
                   key={index}
                   initial={card.initial}
                   dragable={card.dragable}
+                  setPlaced={() => setPlaced(card, index)}
                 >
                   {card.back}
                 </Dragable>

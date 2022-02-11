@@ -3,18 +3,16 @@ import { gameActionTypes } from "../../types";
 
 export function setScores(gameId, amountOfParticipants, participants) {
   return function (dispatch) {
-    return scoresService
-      .setScores(gameId, amountOfParticipants, participants)
-      .then((newScores) => {
-        dispatch(setScoresSuccess(newScores[gameId]));
-      });
+    return scoresService.setScores(gameId, participants).then((newScores) => {
+      dispatch(setScoresSuccess(newScores));
+    });
   };
 }
 
 export function loadScores(gameId) {
   return function (dispatch) {
     return scoresService.loadScores(gameId).then((scores) => {
-      dispatch(loadScoresSuccess(scores[gameId]));
+      dispatch(loadScoresSuccess(scores));
     });
   };
 }

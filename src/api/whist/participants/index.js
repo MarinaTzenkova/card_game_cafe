@@ -8,23 +8,29 @@ const baseUrl = "http://localhost:3001/participants";
 // },
 
 export function setParticipants(gameId, players) {
-  const participants = Object.keys(players).map((key, index) => ({
-    name: players[key],
-    id: index,
-    hand: [],
-  }));
   return fetch(baseUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ [gameId]: participants }),
+    body: JSON.stringify({ id: gameId, players }),
   }).then((response) => {
     if (response.ok) return response.json();
     throw response;
   });
 }
 
-export function loadParticipants() {
-  return fetch(baseUrl).then((response) => {
+export function loadParticipants(id) {
+  return fetch(baseUrl + `/${id}`).then((response) => {
+    if (response.ok) return response.json();
+    throw response;
+  });
+}
+
+export function updateHand(gameId, participantId, hand) {
+  return fetch(baseUrl + `/${gameId}/${participantId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ hand }),
+  }).then((response) => {
     if (response.ok) return response.json();
     throw response;
   });

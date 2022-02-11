@@ -6,9 +6,12 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
     "deck-of-cards": "^0.1.8",
+    "express": "^4.17.2",
     "json-server": "^0.17.0",
-    "json-socket-server": "^0.0.4",
+    "lowdb": "^1.0.0",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -20,16 +23,15 @@
     "react-use-gesture": "^9.1.3",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.4.1",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
     "tailwind": "^4.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "run-p start:api start:app",
+    "start": "run-p start:app start:api",
     "start:app": "react-scripts start",
-    "prestart:api": "node tools/createMock.js",
-    "start:api": "json-server --port 3001 --watch tools/db.json --delay 0",
-    "prestart:ws": "node tools/createMock.js",
-    "start:ws": "json-socket-server --port 3001 tools/db.json",
+    "start:api": "nodemon --ignore 'db.json' server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -54,6 +56,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
+    "nodemon": "^2.0.15",
     "postcss": "^8.4.5",
     "tailwindcss": "^3.0.17"
   }

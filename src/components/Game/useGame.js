@@ -34,8 +34,6 @@ export default function useGame() {
     dispatch(
       updateGame({
         ...game,
-        amountOfParticipants: 0,
-        participants: [],
         hasStarted: false,
       })
     );

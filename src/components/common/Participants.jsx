@@ -74,7 +74,11 @@ export default function Participants({ children }) {
           {participant.name}
         </div>
       ))}
-      <div className="bg-blue-300 w-full h-full">{children}</div>
+      {participantPositions.length !== 0 ? (
+        <div className="bg-blue-300 w-full h-full">{children}</div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

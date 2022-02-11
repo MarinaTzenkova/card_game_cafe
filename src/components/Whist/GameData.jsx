@@ -13,6 +13,7 @@ export default function GameData({ children }) {
   const participants = useSelector((state) => state.participants);
   const deck = useSelector((state) => state.deck);
   const scores = useSelector((state) => state.scores);
+  const player = useSelector((state) => state.player);
 
   const [hasLoaded, setHasLoaded] = useState(false);
 
@@ -30,19 +31,21 @@ export default function GameData({ children }) {
       if (Object.keys(scores).length === 0) {
         dispatch(loadScores(game.id));
       }
-
-      dispatch(loadPlayer());
+      if (player.id === -1) {
+        dispatch(loadPlayer());
+      }
     }
 
     if (
       game.hasStarted &&
       participants.length !== 0 &&
       deck.length !== 0 &&
-      Object.keys(scores).length !== 0
+      Object.keys(scores).length !== 0 &&
+      player.id !== -1
     ) {
       setHasLoaded(true);
     }
-  }, [game, participants, deck, scores, dispatch]);
+  }, [game, participants, deck, scores, dispatch, player]);
 
   if (!hasLoaded) return <Spinner />;
 

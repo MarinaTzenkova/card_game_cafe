@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { animated, useSpring } from "react-spring";
 import { useGesture } from "react-use-gesture";
 
-export default function Dragable({ children, initial, dragable }) {
+export default function Dragable({ children, initial, dragable, setPlaced }) {
   const [position, setPosition] = useState([-initial.x, -initial.y]);
   const [{ xy }, set] = useSpring(() => ({ xy: [-initial.x, -initial.y] }));
   const bind = useGesture(
@@ -26,11 +26,12 @@ export default function Dragable({ children, initial, dragable }) {
           const final = [previousX, previousY];
 
           setPosition(final);
+          setPlaced();
         }
       },
     },
     {
-      drag: { bounds: { left: -200, right: 200, top: -250, bottom: 250 } },
+      drag: { bounds: { left: -200, right: 200, top: -200, bottom: 250 } },
     }
   );
 

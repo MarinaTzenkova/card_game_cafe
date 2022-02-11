@@ -13,10 +13,14 @@ const game = {
   currentPlayer: 0,
 };
 
+// {id: [{playerId, cardId}]}
+const board = {};
+
 module.exports = {
   game,
   participants,
   deck,
   scores,
   player,
+  board,
 };

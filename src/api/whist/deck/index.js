@@ -1,24 +1,10 @@
-import cards from "../../mock/cards";
-import { shuffle, slice } from "../utils";
-
 const baseUrl = "http://localhost:3001/deck";
 
 export function setDeck(id, players) {
-  const amountOfPlayers = Object.keys(players).length;
-  const merged = [
-    ...slice(cards.spades, amountOfPlayers),
-    ...slice(cards.hearts, amountOfPlayers),
-    ...slice(cards.diamonds, amountOfPlayers),
-    ...slice(cards.clubs, amountOfPlayers),
-  ];
-
-  const shuffled = shuffle(merged);
-
-  const deck = shuffled.map((card, index) => ({ ...card, dealt: false }));
   return fetch(baseUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ [id]: deck }),
+    body: JSON.stringify({ id, players }),
   }).then((response) => {
     if (response.ok) return response.json();
     throw response;
@@ -26,7 +12,7 @@ export function setDeck(id, players) {
 }
 
 export function loadDeck(id) {
-  return fetch(baseUrl).then((response) => {
+  return fetch(baseUrl + `/${id}`).then((response) => {
     if (response.ok) return response.json();
     throw response;
   });
