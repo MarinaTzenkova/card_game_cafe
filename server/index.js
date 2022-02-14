@@ -27,13 +27,13 @@ app.post("/board", (res, req, next) => {
   next();
 });
 
-configureSocket(server);
+const socket = configureSocket(server);
 
-require("./routes/game")(app, db);
-require("./routes/deck")(app, db);
-require("./routes/participants")(app, db);
+require("./routes/game")(app, db, socket);
+require("./routes/deck")(app, db, socket);
+require("./routes/participants")(app, db, socket);
 require("./routes/player")(app, db);
-require("./routes/scores")(app, db);
+require("./routes/scores")(app, db, socket);
 
 server.listen(port, () => {
   console.log(`JSON Server is running on port ${port}`);

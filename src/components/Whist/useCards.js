@@ -94,7 +94,6 @@ export default function useCards(
       });
     }
   }
-
   function setPlaced(card, index) {
     console.log(card);
     card.dragable = false;

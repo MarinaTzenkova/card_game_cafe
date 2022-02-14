@@ -15,7 +15,7 @@ function generateColumns(players) {
   return columns;
 }
 
-module.exports = (app, db) => {
+module.exports = (app, db, socket) => {
   app.get("/scores/:id", (req, res) => {
     const id = req.params["id"];
     const scores = db.get("scores").get(id).value();

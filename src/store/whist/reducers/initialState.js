@@ -14,4 +14,8 @@ export default {
     name: "",
     id: -1,
   },
+  state: {
+    gameStarted: false,
+    allPlayersJoined: false,
+  },
 };

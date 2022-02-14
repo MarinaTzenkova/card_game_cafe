@@ -29,6 +29,16 @@ export function updateHand(gameId, participantId, hand) {
   };
 }
 
+export function placeCard(gameId, participantId, cardId) {
+  return function (dispatch) {
+    return participantsService
+      .updateHand(gameId, participantId, cardId)
+      .then((updatedParticipants) => {
+        dispatch(updateCardSuccess(updatedParticipants));
+      });
+  };
+}
+
 export function setParticipantsSuccess(participants) {
   return { type: gameActionTypes.SET_PARTICIPANTS_SUCCESS, participants };
 }
@@ -39,4 +49,8 @@ export function loadParticipantsSuccess(participants) {
 
 export function updateHandSuccess(participants) {
   return { type: gameActionTypes.SET_HAND_SUCCESS, participants };
+}
+
+export function updateCardSuccess(participants) {
+  return { type: gameActionTypes.SET_CARD_SUCCESS, participants };
 }

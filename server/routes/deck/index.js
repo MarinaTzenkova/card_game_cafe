@@ -1,7 +1,7 @@
 const { slice, shuffle } = require("../../utils");
 const { cards } = require("../../mock/cards");
 
-module.exports = (app, db) => {
+module.exports = (app, db, socket) => {
   app.get("/deck/:id", (req, res) => {
     const id = req.params["id"];
     const deck = db.get("deck").get(id).value();
