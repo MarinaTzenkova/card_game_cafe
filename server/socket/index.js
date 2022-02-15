@@ -5,12 +5,14 @@ function configureSocket(server) {
 
   io.on("connection", (socket) => {
     console.log("New user connected");
-    //emit message from server to user
-    socket.emit("newMessage", "sup bi4");
 
-    // listen for message from user
-    socket.on("createMessage", (newMessage) => {
-      console.log("newMessage", newMessage);
+    socket.on("join", (room) => {
+      socket.join(room);
+
+      // emitting to a room from specific socket
+      // socket.to("game_cafe").emit("test", "sup bi4");
+
+      io.to("game_cafe").emit("welcome", "Welcome to game cafe");
     });
 
     // when server disconnects from user

@@ -10,7 +10,7 @@ const game = {
   currentRound: -1,
   currentPlayer: -1,
 
-  _initDeck: [],
+  _initialDeck: [],
   currentDeck: [],
 
   // these three have a reference to the player id

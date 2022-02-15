@@ -1,14 +1,18 @@
-const { generatePlayerDeck, generateShuffledDeck } = require("../seeds");
+const {
+  generatePlayerDeck,
+  generateShuffledDeck,
+  getSeed,
+} = require("../seeds");
 
 const gameManager = {
   setupInitialDeck: function (game) {
-    let deck = generatePlayerDeck(game.amountOfParticipants);
+    let deck = getSeed(game.amountOfParticipants);
 
-    console.log(deck);
     game._initialDeck = deck;
   },
-  shuffleDeck: function (game) {
-    game.currentDeck = generateShuffledDeck(game._initialDeck);
+  shuffleDeck: async function (game) {
+    const deck = await generatePlayerDeck(game._initialDeck);
+    game.currentDeck = generateShuffledDeck(deck);
   },
   placeCard: function (game, card, index, hand) {
     card.visibility = "visible";

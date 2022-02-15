@@ -7,8 +7,13 @@ const { states } = require("../../socket/messageTypes");
 // generated deck and scoreboard
 
 module.exports = (app, db, socket) => {
-  app.post("/game", (req, res) => {
-    console.log("test");
+  app.get("/games", (req, res) => {
+    const games = db.get("games").value();
+    const sanitized = games.map((game) => ({ name: game.name, id: game.id }));
+    res.send(sanitized);
+  });
+
+  app.post("/game", async (req, res) => {
     const { name, mode, amountOfParticipants } = req.body;
     const id = db.get("games").value().length;
     const newGame = {
@@ -23,12 +28,10 @@ module.exports = (app, db, socket) => {
     };
 
     gameManager.setupInitialDeck(newGame);
-    gameManager.shuffleDeck(newGame);
+    await gameManager.shuffleDeck(newGame);
 
     db.get("games").push(newGame).value();
     db.write();
-
-    res.send(id);
 
     socket.to("game_cafe").emit("NEW_GAME", {
       id,

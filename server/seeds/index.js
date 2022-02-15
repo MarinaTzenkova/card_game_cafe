@@ -1,15 +1,21 @@
-const { cards } = require("../mock/cards");
-const { slice, shuffle } = require("../utils");
+const { shuffle } = require("../utils");
+const fs = require("fs");
+const path = require("path");
 
-function generatePlayerDeck(nrOfPeople) {
-  const deck = [
-    ...slice(cards.spades, nrOfPeople),
-    ...slice(cards.hearts, nrOfPeople),
-    ...slice(cards.diamonds, nrOfPeople),
-    ...slice(cards.clubs, nrOfPeople),
-  ];
+function getSeed(nrOfPeople) {
+  return `${nrOfPeople}PlayerDeck.json`;
+}
 
-  return deck;
+async function generatePlayerDeck(seed) {
+  try {
+    const fileName = path.join(__dirname, seed);
+
+    const file = await fs.readFileSync(fileName);
+    const parsed = JSON.parse(file.toString())["deck"];
+    return parsed;
+  } catch (error) {
+    throw error;
+  }
 }
 
 function generateShuffledDeck(deck) {
@@ -17,6 +23,7 @@ function generateShuffledDeck(deck) {
 }
 
 module.exports = {
+  getSeed,
   generatePlayerDeck,
   generateShuffledDeck,
 };

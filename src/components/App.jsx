@@ -4,10 +4,15 @@ import { Home } from "./Home/Home";
 import NavBar from "./common/NavBar";
 import Game from "./Game/Game";
 import { useEffect } from "react";
+import Rooms from "./Game/Rooms";
+import { joinGameCafe } from "../socket";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
   useEffect(() => {
     // attach sockets for game info
+    joinGameCafe(dispatch);
   }, []);
   return (
     <div>
@@ -16,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/game" element={<Game />} />
+          <Route path="/rooms" element={<Rooms />} />
         </Routes>
       </Layout>
     </div>

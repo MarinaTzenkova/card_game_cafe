@@ -1,19 +1,17 @@
 import * as gameService from "../../../api/game";
+import { joinGameRoom } from "../../../socket";
 import { CREATE_GAME_SUCCESS, GET_GAME_SUCCESS } from "../../types";
 
 export function createGame(game) {
-  return function (dispatch) {
-    return gameService
-      .startGame(game)
-      .then((newGame) => dispatch(createGameSuccess(newGame)));
-  };
+  return gameService.startGame(game);
 }
 
 export function getGame(id) {
   return function (dispatch) {
-    return gameService
-      .getGame(id)
-      .then((game) => dispatch(getGameSuccess(game)));
+    return gameService.getGame(id).then((game) => {
+      joinGameRoom(id);
+      dispatch(getGameSuccess(game));
+    });
   };
 }
 

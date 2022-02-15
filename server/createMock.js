@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 const fs = require("fs");
 const path = require("path");
-const { games, players } = require("./mockDataNew");
+const { games, players } = require("./data");
 const data = JSON.stringify({ games, players });
 const filepath = path.join(__dirname, "db.json");
 

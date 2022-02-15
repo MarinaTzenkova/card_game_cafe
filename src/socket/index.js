@@ -1,30 +1,19 @@
-import socketIOClient from "socket.io-client";
+import { io } from "socket.io-client";
+import { getRooms } from "../store/actions/rooms";
 const ENDPOINT = "http://localhost:3001";
 
-const io = socketIOClient(ENDPOINT);
+const socket = io(ENDPOINT);
 
-export function joinGameRoom(id) {
-  io.on("connection", (socket) => {
-    socket.join("game_room");
-  });
+export function joinGameRoom(id, dispatch) {
+  socket.emit("join", `game-${id}`);
 }
 
-export function joinGameCafe() {
-  io.on("connection", (socket) => {
-    socket.join("game_cafe");
+export function joinGameCafe(dispatch) {
+  socket.emit("join", "game_cafe");
+  socket.on("welcome", function (message) {
+    console.log(message);
+  });
+  socket.on("NEW_GAME", function () {
+    dispatch(getRooms());
   });
 }
-// // connection with server
-// socket.on("connect", function () {
-//   console.log("Connected to Server");
-// });
-
-// // message listener from server
-// socket.on("newMessage", function (message) {
-//   console.log(message);
-// });
-
-// // when disconnected from server
-// socket.on("disconnect", function () {
-//   console.log("Disconnect from server");
-// });

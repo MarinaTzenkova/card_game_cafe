@@ -7,4 +7,5 @@ export const initialState = {
     deck: [],
     state: undefined,
   },
+  rooms: [],
 };

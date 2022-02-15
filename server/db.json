@@ -1,1 +1,117 @@
-{"games":[],"players":[]}
+{
+  "games": [
+    {
+      "id": 0,
+      "name": "1234",
+      "mode": "1-8-1",
+      "amountOfParticipants": 3,
+      "joined": 1,
+      "state": "GAME_CREATED",
+      "currentRound": -1,
+      "currentPlayer": -1,
+      "_initialDeck": "3PlayerDeck.json",
+      "currentDeck": [
+        {
+          "suit": 2,
+          "rank": "K"
+        },
+        {
+          "suit": 3,
+          "rank": "A"
+        },
+        {
+          "suit": 0,
+          "rank": "K"
+        },
+        {
+          "suit": 3,
+          "rank": 10
+        },
+        {
+          "suit": 2,
+          "rank": 10
+        },
+        {
+          "suit": 1,
+          "rank": "K"
+        },
+        {
+          "suit": 3,
+          "rank": "J"
+        },
+        {
+          "suit": 2,
+          "rank": "A"
+        },
+        {
+          "suit": 2,
+          "rank": "J"
+        },
+        {
+          "suit": 1,
+          "rank": 10
+        },
+        {
+          "suit": 1,
+          "rank": "A"
+        },
+        {
+          "suit": 0,
+          "rank": "J"
+        },
+        {
+          "suit": 0,
+          "rank": "Q"
+        },
+        {
+          "suit": 2,
+          "rank": "Q"
+        },
+        {
+          "suit": 2,
+          "rank": 9
+        },
+        {
+          "suit": 1,
+          "rank": "J"
+        },
+        {
+          "suit": 3,
+          "rank": "K"
+        },
+        {
+          "suit": 0,
+          "rank": 9
+        },
+        {
+          "suit": 3,
+          "rank": 9
+        },
+        {
+          "suit": 1,
+          "rank": "Q"
+        },
+        {
+          "suit": 1,
+          "rank": 9
+        },
+        {
+          "suit": 3,
+          "rank": "Q"
+        },
+        {
+          "suit": 0,
+          "rank": 10
+        },
+        {
+          "suit": 0,
+          "rank": "A"
+        }
+      ],
+      "placedCards": [],
+      "takenCards": [],
+      "hands": []
+    }
+  ],
+  "players": []
+}

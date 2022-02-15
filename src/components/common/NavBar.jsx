@@ -11,6 +11,13 @@ export default function NavBar() {
       </NavLink>
       <span className="mx-2">|</span>
       <NavLink
+        to="/rooms"
+        style={({ isActive }) => ({ color: isActive ? "#A38984" : "" })}
+      >
+        Rooms
+      </NavLink>
+      <span className="mx-2">|</span>
+      <NavLink
         to="/game"
         style={({ isActive }) => ({ color: isActive ? "#A38984" : "" })}
       >
