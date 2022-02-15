@@ -1,4 +1,4 @@
-const messageTypes = {
+const states = {
   created: "GAME_CREATED",
   started: "GAME_START",
   joined: "PARTICIPANT_JOINED",
@@ -12,6 +12,11 @@ const messageTypes = {
   // GAME_END: "GAME_END",
 };
 
+const gameState = "GAME_STATE";
+const playerState = "PLAYER_STATE";
+
 module.exports = {
-  messageTypes,
+  states,
+  gameState,
+  playerState,
 };

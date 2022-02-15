@@ -5,6 +5,8 @@ const game = {
   amountOfParticipants: -1,
   joined: 0,
 
+  state: undefined,
+
   currentRound: -1,
   currentPlayer: -1,
 

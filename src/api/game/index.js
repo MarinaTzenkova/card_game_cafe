@@ -9,3 +9,7 @@ export function startGame(game) {
     body: JSON.stringify(game),
   }).then((response) => handleResponse(response));
 }
+
+export function getGame(id) {
+  return fetch(`${baseUrl}/${id}`).then((response) => handleResponse(response));
+}

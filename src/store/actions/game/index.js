@@ -1,5 +1,5 @@
 import * as gameService from "../../../api/game";
-import { CREATE_GAME_SUCCESS, GAME_CREATED_UPDATE } from "../../types";
+import { CREATE_GAME_SUCCESS, GET_GAME_SUCCESS } from "../../types";
 
 export function createGame(game) {
   return function (dispatch) {
@@ -9,12 +9,11 @@ export function createGame(game) {
   };
 }
 
-export function gameCreated(socket) {
+export function getGame(id) {
   return function (dispatch) {
-    socket.on("GAME_CREATED", (game) => {
-      console.log(game);
-      dispatch(createGameSuccess(game));
-    });
+    return gameService
+      .getGame(id)
+      .then((game) => dispatch(getGameSuccess(game)));
   };
 }
 
@@ -22,6 +21,6 @@ export function createGameSuccess(game) {
   return { type: CREATE_GAME_SUCCESS, game };
 }
 
-export function gameCreatedSuccess(game) {
-  return { type: GAME_CREATED_UPDATE, game };
+export function getGameSuccess(game) {
+  return { type: GET_GAME_SUCCESS, game };
 }

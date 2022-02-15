@@ -17,7 +17,7 @@ export default function Game() {
     setPlayers(newVal);
   }
 
-  function handleInput(event, index) {
+  function handleInput(event) {
     const input = event.target.value;
     if (input === "") {
       setError(true);

@@ -1,5 +1,6 @@
 export const SET_PLAYER_SUCCESS = "SET_PLAYER_SUCCESS";
 export const CREATE_GAME_SUCCESS = "CREATE_GAME_SUCCESS";
+export const GET_GAME_SUCCESS = "GET_GAME_SUCCESS";
 
 // socket consts
 export const GAME_CREATED_UPDATE = "GAME_CREATED_UPDATE";

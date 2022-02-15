@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { updateGame } from "../../store/actions/game";
-import prepareGame from "./prepareGame";
-import { useNavigate } from "react-router";
+import { createGame } from "../../store/actions/game";
 
 export default function useGame() {
   const options = [3, 4, 5, 6, 7, 8];
@@ -13,33 +11,22 @@ export default function useGame() {
   const game = useSelector((state) => state.game);
   const dispatch = useDispatch();
 
-  const navigate = useNavigate();
-
   function setInitialState() {
     setPlayers(3);
   }
 
   function startGame() {
     if (!error) {
-      const newGame = prepareGame(game, name, players);
-      dispatch(updateGame(newGame));
-      navigate("/game/rooms");
-      // dispatch(setScores(newGame.id, players, participantNames));
-      // dispatch(setDeck(newGame.id, participantNames));
-
-      // dispatch(setParticipants(newGame.id, participantNames));
-      // dispatch(setPlayer(participantNames[0], 0)).then(() => {
-      // });
+      const newGame = {
+        name,
+        mode: "1-8-1",
+        amountOfParticipants: players,
+      };
+      dispatch(createGame(newGame));
     }
   }
 
   useEffect(() => {
-    dispatch(
-      updateGame({
-        ...game,
-        hasStarted: false,
-      })
-    );
     setInitialState();
   }, []);
 
