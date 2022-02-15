@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { updateHand } from "../../store/whist/actions/participants";
+import { updateHand } from "../../store/actions/participants";
 import { CardBack } from "./Cards/CardBack";
 import { CardFront } from "./Cards/CardFront";
 import getOffset from "./utils/getOffset";

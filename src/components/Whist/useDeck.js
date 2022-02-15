@@ -1,7 +1,7 @@
 import Deck from "deck-of-cards";
 import { useEffect, useState } from "react";
-import { loadCards } from "../../store/whist/actions/cards";
-import { loadGame } from "../../store/whist/actions/game";
+import { loadCards } from "../../store/actions/cards";
+import { loadGame } from "../../store/actions/game";
 
 export default function useDeck(dispatch, cards, game) {
   const [deck, setDeck] = useState(null);

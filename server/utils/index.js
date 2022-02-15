@@ -8,6 +8,8 @@ function shuffle(array) {
   let currentIndex = array.length,
     randomIndex;
 
+  let arrayCopy = [...array];
+
   // While there remain elements to shuffle...
   while (currentIndex !== 0) {
     // Pick a remaining element...
@@ -15,13 +17,13 @@ function shuffle(array) {
     currentIndex--;
 
     // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
+    [arrayCopy[currentIndex], arrayCopy[randomIndex]] = [
+      arrayCopy[randomIndex],
+      arrayCopy[currentIndex],
     ];
   }
 
-  return array;
+  return arrayCopy;
 }
 
 module.exports = {

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { loadDeck } from "../../store/whist/actions/deck";
-import { loadGame } from "../../store/whist/actions/game";
-import { loadScores } from "../../store/whist/actions/scores";
-import { loadParticipants } from "../../store/whist/actions/participants";
-import { loadPlayer } from "../../store/whist/actions/player";
+import { loadDeck } from "../../store/actions/deck";
+import { loadGame } from "../../store/actions/game";
+import { loadScores } from "../../store/actions/scores";
+import { loadParticipants } from "../../store/actions/participants";
+import { loadPlayer } from "../../store/actions/player";
 import Spinner from "../common/Spinner";
 
 export default function GameData({ children }) {

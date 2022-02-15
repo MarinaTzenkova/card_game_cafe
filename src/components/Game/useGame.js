@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { updateGame } from "../../store/whist/actions/game";
+import { updateGame } from "../../store/actions/game";
 import prepareGame from "./prepareGame";
-import { setParticipants } from "../../store/whist/actions/participants";
-import { setScores } from "../../store/whist/actions/scores";
-import { setPlayer } from "../../store/whist/actions/player";
-import { setDeck } from "../../store/whist/actions/deck";
 import { useNavigate } from "react-router";
 
 export default function useGame() {

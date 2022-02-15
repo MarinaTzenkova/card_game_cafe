@@ -1,5 +1,4 @@
 import socketIOClient from "socket.io-client";
-import { messageTypes } from "./messageTypes";
 const ENDPOINT = "http://localhost:3001";
 
 const socket = socketIOClient(ENDPOINT);
@@ -19,6 +18,6 @@ socket.on("disconnect", function () {
   console.log("Disconnect from server");
 });
 
-socket.on(messageTypes.GAME_STARTED, (msg) => {
-  console.log(msg);
-});
+export function setupSocket() {
+  return socket;
+}
