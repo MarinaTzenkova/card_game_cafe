@@ -45,6 +45,7 @@ export default function Participants({ children }) {
     setParticipants(() => {
       const temp = [];
       const predefinedPositions = positions[players.length + 1];
+      console.log(players.length);
       temp.push({
         position:
           game.amountOfParticipants <= 6
@@ -62,7 +63,7 @@ export default function Participants({ children }) {
       });
       return temp;
     });
-  }, [dispatch, players]);
+  }, [dispatch, players, player.id, game.amountOfParticipants, player.name]);
 
   return (
     <div className="w-3/4 h-5/6 mx-auto flex items-center justify-center relative my-10 select-none">

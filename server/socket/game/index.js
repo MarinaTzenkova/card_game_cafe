@@ -55,9 +55,7 @@ module.exports = (gameService, playerService, socket, io) => {
   socket.on("PLAY_CARD", (body) => {
     console.log("Placing card");
     let { gameId, playerId, card } = body;
-
     playerId = parseInt(playerId);
-
     const game = gameService.getGame(gameId);
 
     const state_machine = Object.assign(machine, { game });
@@ -69,20 +67,22 @@ module.exports = (gameService, playerService, socket, io) => {
 
       if (index >= 0 && index < game.playerIds.length - 1)
         return game.playerIds[index + 1];
+      // in case this is the last player, return -1
       else {
         return -1;
       }
     }
 
     const nextPlayer = getNext();
+
     console.log("setting next player " + nextPlayer);
+    state_machine.dispatch("setCurrentPlayer", nextPlayer);
+
     if (nextPlayer !== -1) {
-      state_machine.dispatch("setCurrentPlayer", nextPlayer);
       socket.to(`game-${gameId}`).emit("CARD_PLAYED", gameId);
     } else {
       socket.to(`game-${gameId}`).emit("ROUND_FINISHED", gameId);
     }
-
     gameService.updateGame(gameId, state_machine.game);
   });
 };

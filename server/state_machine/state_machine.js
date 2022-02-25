@@ -4,6 +4,8 @@ const {
   generateShuffledDeck,
 } = require("../seeds");
 
+const DEFAULT_SCORES = [2, 3, 4, 5, 6, 7];
+
 const machine = {
   state: "INIT",
   transitions: {
@@ -15,14 +17,15 @@ const machine = {
 
         const playerDeck = await generatePlayerDeck(this.game._initialDeck);
         this.game.currentDeck = generateShuffledDeck(playerDeck);
+        this.generateScoreBoard();
       },
       playerJoin: function (playerId) {
         if (this.game.playerIds.length === this.game.amountOfParticipants) {
           this.changeState("ROUND_INIT");
         } else {
           this.game.playerIds.push(playerId);
+          this.game.lastPlayer = playerId;
           if (this.game.playerIds.length === this.game.amountOfParticipants) {
-            this.game.lastPlayer = playerId;
             this.changeState("ROUND_INIT");
           }
         }
@@ -39,16 +42,10 @@ const machine = {
       },
       setCurrentPlayer: function (nextPlayer) {
         // In case this was the last player, set the round to end
-        if (this.game.lastPlayer === nextPlayer) {
+        if (nextPlayer === -1) {
           this.changeState("ROUND_END");
-          return;
         }
-        if (this.game.placedCards.length !== 0) {
-          // ensure that the winner of the placed cards has taken them
-          return;
-        } else {
-          this.game.currentPlayer = nextPlayer;
-        }
+        this.game.currentPlayer = nextPlayer;
       },
       deal: function () {
         this.game.playerIds.forEach((player) => {
@@ -60,9 +57,10 @@ const machine = {
           this.game.hands.push({ playerId: player, currentHand: hand });
         });
       },
-      placeScoreBet: function () {},
+      placeScoreBet: function (playerId, bet, round) {},
       placeCard: function (card, playerId) {
         if (this.game.placedCards.length === this.game.amountOfParticipants) {
+          console.log("Cannot place anymore cards");
           this.changeState("ROUND_END");
         } else {
           console.log(card, playerId);
@@ -119,6 +117,21 @@ const machine = {
     this.game.hands = [];
     this.game.placedCards = [];
     this.game.takenCards = [];
+  },
+  generateScoreBoard() {
+    const ones = Array(this.game.amountOfParticipants).fill(1);
+    const eights = Array(this.game.amountOfParticipants).fill(8);
+
+    const columns = [
+      ...ones,
+      ...DEFAULT_SCORES,
+      ...eights,
+      ...DEFAULT_SCORES,
+      ...ones,
+    ];
+
+    // populate arr for keeping track of all necessary rounds
+    this.game.rounds = columns;
   },
 };
 

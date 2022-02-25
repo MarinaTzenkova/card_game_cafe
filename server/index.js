@@ -7,7 +7,7 @@ configureMiddleware(app);
 
 const { db } = configureDb();
 
-require("./socket")(app, db);
+require("./socket")(server, db);
 require("./routes/game")(app, db);
 require("./routes/player")(app, db);
 

@@ -1,6 +1,8 @@
 import { io } from "socket.io-client";
 import { getGame } from "../store/actions/game";
+import { getPlayer, getPlayers } from "../store/actions/player";
 import { getRooms } from "../store/actions/rooms";
+import getCookie from "../utils/getCookie";
 import setCookie from "../utils/setCookie";
 
 const ENDPOINT = "http://localhost:3001";
@@ -29,7 +31,11 @@ export function joinGameCafe(dispatch) {
   });
 
   socket.on("GAME_STARTING", (message) => {
+    const playerId = parseInt(getCookie("playerId"));
+
     dispatch(getGame(message));
+    dispatch(getPlayers(playerId, message));
+    dispatch(getPlayer(playerId, message));
   });
 
   socket.on("PLAYER_ID", (message) => {
@@ -37,11 +43,20 @@ export function joinGameCafe(dispatch) {
   });
 
   socket.on("CARD_PLAYED", (message) => {
-    dispatch(getGame(message));
+    console.log(message);
+    const gameId = message;
+    const playerId = parseInt(getCookie("playerId"));
+    dispatch(getGame(gameId));
+    dispatch(getPlayers(playerId, gameId));
+    dispatch(getPlayer(playerId, gameId));
   });
 
   socket.on("ROUND_FINISHED", (message) => {
-    dispatch(getGame(message));
+    const gameId = message;
+    const playerId = parseInt(getCookie("playerId"));
+    dispatch(getGame(gameId));
+    dispatch(getPlayers(playerId, gameId));
+    dispatch(getPlayer(playerId, gameId));
   });
 }
 

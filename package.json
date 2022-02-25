@@ -31,8 +31,8 @@
   "scripts": {
     "start": "run-p start:app start:api",
     "start:app": "react-scripts start",
-    "prestart:apsi": "node server/createInitialDb.js",
-    "start:api": "node server/index.js",
+    "prestart:api": "node server/createInitialDb.js",
+    "start:api": "nodemon server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
