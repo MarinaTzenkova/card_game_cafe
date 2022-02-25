@@ -7,6 +7,9 @@ const game = {
   playerIds: [],
   lastPlayer: -1,
 
+  rounds: [],
+  scores: [],
+
   currentRound: -1,
   currentPlayer: -1,
 
@@ -35,6 +38,12 @@ const player = {
   currentActiveGame: -1,
 };
 
+const score = {
+  playerId: -1,
+  currentBet: -1,
+  total: -1,
+};
+
 const card = {
   suit: undefined,
   rank: undefined,
@@ -53,4 +62,5 @@ module.exports = {
   games,
   card,
   taken,
+  score,
 };

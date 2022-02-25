@@ -1,6 +1,6 @@
 const { playerDbHelper, gameDbHelper } = require("../../service");
 
-module.exports = (app, db, socket) => {
+module.exports = (app, db) => {
   const dbService = playerDbHelper(db);
   const gameService = gameDbHelper(db);
   app.get("/players/:id/:playerId", (req, res) => {

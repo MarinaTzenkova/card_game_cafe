@@ -29,12 +29,19 @@ export function joinGameCafe(dispatch) {
   });
 
   socket.on("GAME_STARTING", (message) => {
-    console.log(message);
     dispatch(getGame(message));
   });
 
   socket.on("PLAYER_ID", (message) => {
     setCookie("playerId", message, toString(), 1);
+  });
+
+  socket.on("CARD_PLAYED", (message) => {
+    dispatch(getGame(message));
+  });
+
+  socket.on("ROUND_FINISHED", (message) => {
+    dispatch(getGame(message));
   });
 }
 
