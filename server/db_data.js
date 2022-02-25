@@ -3,9 +3,9 @@ const game = {
   name: "",
   mode: "1-8-1",
   amountOfParticipants: -1,
-  joined: 0,
-
-  state: undefined,
+  dbState: undefined,
+  playerIds: [],
+  lastPlayer: -1,
 
   currentRound: -1,
   currentPlayer: -1,
@@ -32,6 +32,7 @@ const taken = {
 const player = {
   id: -1,
   name: "",
+  currentActiveGame: -1,
 };
 
 const card = {

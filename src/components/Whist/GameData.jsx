@@ -1,53 +1,42 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { getGame } from "../../store/actions/game";
+import { getPlayer, getPlayers } from "../../store/actions/player";
+import { useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { loadDeck } from "../../store/actions/deck";
-import { loadGame } from "../../store/actions/game";
-import { loadScores } from "../../store/actions/scores";
-import { loadParticipants } from "../../store/actions/participants";
-import { loadPlayer } from "../../store/actions/player";
-import Spinner from "../common/Spinner";
+import getCookie from "../../utils/getCookie";
 
 export default function GameData({ children }) {
-  const game = useSelector((state) => state.game);
-  const participants = useSelector((state) => state.participants);
-  const deck = useSelector((state) => state.deck);
-  const scores = useSelector((state) => state.scores);
-  const player = useSelector((state) => state.player);
+  const params = useParams();
 
   const [hasLoaded, setHasLoaded] = useState(false);
 
+  const players = useSelector((state) => state.players);
+  const game = useSelector((state) => state.game);
+  const id = params["id"];
+  const playerId = getCookie("playerId");
+
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!game.hasStarted) {
-      dispatch(loadGame());
-    } else {
-      if (participants.length === 0) {
-        dispatch(loadParticipants(game.id));
-      }
-      if (deck.length === 0) {
-        dispatch(loadDeck(game.id));
-      }
-      if (Object.keys(scores).length === 0) {
-        dispatch(loadScores(game.id));
-      }
-      if (player.id === -1) {
-        dispatch(loadPlayer());
-      }
+    dispatch(getGame(id));
+
+    // get player from cookie/localstorage
+    if (playerId !== undefined && playerId !== null) {
+      dispatch(getPlayers(playerId, id));
+      dispatch(getPlayer(playerId, id));
     }
 
-    if (
-      game.hasStarted &&
-      participants.length !== 0 &&
-      deck.length !== 0 &&
-      Object.keys(scores).length !== 0 &&
-      player.id !== -1
-    ) {
+    if (game.currentRound !== -1 && players.length !== 0) {
       setHasLoaded(true);
     }
-  }, [game, participants, deck, scores, dispatch, player]);
+  }, [playerId, id, game.currentRound, players.length, dispatch]);
 
-  if (!hasLoaded) return <Spinner />;
+  if (!hasLoaded)
+    return (
+      <div className="w-1/2 text-center text-white flex items-center justify-center">
+        Game is starting...
+      </div>
+    );
 
   return children;
 }

@@ -44,7 +44,7 @@ export default function Dragable({ children, initial, dragable, setPlaced }) {
   return (
     <animated.div
       {...bind()}
-      className="absolute"
+      className="absolute select-none"
       style={{
         transform: xy.to((x, y) => `translate3d(${x}px, ${y}px, 0)`),
         touchAction: "none",

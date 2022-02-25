@@ -1,30 +1,17 @@
-const express = require("express");
-const http = require("http");
-const app = express();
-const port = process.env.PORT || 3001;
-let server = http.createServer(app);
+const { configureServer } = require("./config/configureServer");
+const { configureDb } = require("./config/configureDb");
+const { configureSocket } = require("./config/configureSocket");
+const { configureMiddleware } = require("./config/configureMiddleware");
 
-const path = require("path");
-const route = path.join(__dirname, "db.json");
-const low = require("lowdb");
-const FileSync = require("lowdb/adapters/FileSync");
-const adapter = new FileSync(route);
-const db = low(adapter);
+const { app, server, port } = configureServer();
+configureMiddleware(app);
 
-const { configureSocket } = require("./socket");
-const { configureServer } = require("./server");
+const { db } = configureDb();
 
-configureServer(app);
-
-app.use((req, res, next) => {
-  if (req.method === "POST") {
-    // use socket to notify all players when a card is played
-  }
-  next();
-});
-const socket = configureSocket(server);
+const socket = configureSocket(server, db);
 
 require("./routes/game")(app, db, socket);
+require("./routes/player")(app, db, socket);
 
 server.listen(port, () => {
   console.log(`JSON Server is running on port ${port}`);

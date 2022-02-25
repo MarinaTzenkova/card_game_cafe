@@ -1,0 +1,175 @@
+{
+  "games": [
+    {
+      "id": 0,
+      "name": "game one",
+      "mode": "1-8-1",
+      "amountOfParticipants": 3,
+      "dbState": "ROUND_INIT",
+      "playerIds": [
+        0,
+        1,
+        2
+      ],
+      "lastPlayer": 2,
+      "currentRound": 1,
+      "currentPlayer": 0,
+      "_initialDeck": "3PlayerDeck.json",
+      "currentDeck": [
+        {
+          "id": 15,
+          "suit": 2,
+          "rank": "Q"
+        },
+        {
+          "id": 11,
+          "suit": 1,
+          "rank": "A"
+        },
+        {
+          "id": 12,
+          "suit": 2,
+          "rank": 9
+        },
+        {
+          "id": 18,
+          "suit": 3,
+          "rank": 9
+        },
+        {
+          "id": 21,
+          "suit": 3,
+          "rank": "Q"
+        },
+        {
+          "id": 13,
+          "suit": 2,
+          "rank": 10
+        },
+        {
+          "id": 19,
+          "suit": 3,
+          "rank": 10
+        },
+        {
+          "id": 6,
+          "suit": 1,
+          "rank": 9
+        },
+        {
+          "id": 1,
+          "suit": 0,
+          "rank": 10
+        },
+        {
+          "id": 16,
+          "suit": 2,
+          "rank": "K"
+        },
+        {
+          "id": 8,
+          "suit": 1,
+          "rank": "J"
+        },
+        {
+          "id": 3,
+          "suit": 0,
+          "rank": "Q"
+        },
+        {
+          "id": 17,
+          "suit": 2,
+          "rank": "A"
+        },
+        {
+          "id": 9,
+          "suit": 1,
+          "rank": "Q"
+        },
+        {
+          "id": 20,
+          "suit": 3,
+          "rank": "J"
+        },
+        {
+          "id": 0,
+          "suit": 0,
+          "rank": 9
+        },
+        {
+          "id": 5,
+          "suit": 0,
+          "rank": "A"
+        },
+        {
+          "id": 10,
+          "suit": 1,
+          "rank": "K"
+        },
+        {
+          "id": 2,
+          "suit": 0,
+          "rank": "J"
+        },
+        {
+          "id": 22,
+          "suit": 3,
+          "rank": "K"
+        },
+        {
+          "id": 14,
+          "suit": 2,
+          "rank": "J"
+        }
+      ],
+      "placedCards": [],
+      "takenCards": [],
+      "hands": [
+        {
+          "playerId": 0,
+          "currentHand": [
+            {
+              "id": 23,
+              "suit": 3,
+              "rank": "A"
+            }
+          ]
+        },
+        {
+          "playerId": 1,
+          "currentHand": [
+            {
+              "id": 7,
+              "suit": 1,
+              "rank": 10
+            }
+          ]
+        },
+        {
+          "playerId": 2,
+          "currentHand": [
+            {
+              "id": 4,
+              "suit": 0,
+              "rank": "K"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "players": [
+    {
+      "id": 0,
+      "name": "player one"
+    },
+    {
+      "id": 1,
+      "name": "player two"
+    },
+    {
+      "id": 2,
+      "name": "player three"
+    }
+  ]
+}

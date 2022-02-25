@@ -1,79 +1,35 @@
-const { game } = require("../../data");
-const gameManager = require("../../managers/gameManager");
-const { states } = require("../../socket/messageTypes");
-
-// POST request for game creation
-// emits message on success,
-// generated deck and scoreboard
+const { gameDbHelper } = require("../../service");
 
 module.exports = (app, db, socket) => {
+  const dbService = gameDbHelper(db);
   app.get("/games", (req, res) => {
-    const games = db.get("games").value();
-    const sanitized = games.map((game) => ({ name: game.name, id: game.id }));
+    const games = dbService.getGames();
+
+    const sanitized = games.map((game) => ({
+      name: game.name,
+      id: game.id,
+      joined: game.playerIds.length,
+      required: game.amountOfParticipants,
+    }));
     res.send(sanitized);
-  });
-
-  app.post("/game", async (req, res) => {
-    const { name, mode, amountOfParticipants } = req.body;
-    const id = db.get("games").value().length;
-    const newGame = {
-      ...game,
-      id,
-      name,
-      mode,
-      amountOfParticipants,
-      // the player that created the game joins automatically
-      joined: 1,
-      state: states.created,
-    };
-
-    gameManager.setupInitialDeck(newGame);
-    await gameManager.shuffleDeck(newGame);
-
-    db.get("games").push(newGame).value();
-    db.write();
-
-    socket.to("game_cafe").emit("NEW_GAME", {
-      id,
-      name,
-    });
   });
 
   app.get("/game/:id", (req, res) => {
     const id = req.params["id"];
-    const game = db.get("games").get(id).value();
 
-    const sanitizedDeck = game.currentDeck.map((card) => ({
-      suit: card.suit,
-      rank: card.rank,
-      placed: game.placedCards.includes(card),
-      dealtTo: game.hands.find((hand) => hand.currentHand.includes(card))
-        ?.playerId,
-      takenBy: game.takenCards.find((taken) =>
-        taken.currentTaken.includes(card)
-      )?.playerId,
-    }));
-
-    res.send({
-      nrOfPlayers: game.amountOfParticipants,
-      joined: game.joined,
+    const game = dbService.getGame(id);
+    const sanitized = {
       name: game.name,
       id: game.id,
-      deck: sanitizedDeck,
-      state: game.state,
-    });
+      mode: game.mode,
+      currentRound: game.currentRound,
+      currentPlayer: game.currentPlayer,
+      deck: game.currentDeck,
+      placed: game.placedCards,
+      taken: game.takenCards,
+      amountOfParticipants: game.amountOfParticipants,
+    };
+
+    res.send(sanitized);
   });
 };
-
-// we do not send the full game data for now
-// socket.to("game_cafe").emit(gameState, {
-//   nrOfPlayers: newGame.amountOfParticipants,
-//   joined: newGame.joined,
-//   name: newGame.name,
-//   id: newGame.id,
-//   deck: newGame.currentDeck,
-//   placed: newGame.placedCards,
-//   hands: newGame.hands,
-//   taken: newGame.takenCards,
-//   state: newGame.state,
-// });

@@ -31,7 +31,7 @@
   "scripts": {
     "start": "run-p start:app start:api",
     "start:app": "react-scripts start",
-    "prestart:api": "node server/createMock.js",
+    "prestart:apsi": "node server/createInitialDb.js",
     "start:api": "node server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { makeGame } from "../../socket";
 import { createGame } from "../../store/actions/game";
 
 export default function useGame() {
@@ -11,6 +12,7 @@ export default function useGame() {
   const [name, setName] = useState("");
   const game = useSelector((state) => state.game);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function setInitialState() {
     setPlayers(3);
@@ -23,7 +25,8 @@ export default function useGame() {
         mode: "1-8-1",
         amountOfParticipants: players,
       };
-      createGame(newGame).then(() => navigate("/rooms"));
+      makeGame(dispatch, newGame);
+      navigate("/rooms");
     }
   }
 

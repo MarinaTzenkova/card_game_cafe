@@ -2,10 +2,17 @@ export const initialState = {
   game: {
     id: -1,
     name: "",
-    nrOfPlayers: -1,
-    joined: -1,
+    mode: "1-8-1",
+
+    currentRound: -1,
+    currentPlayer: -1,
     deck: [],
-    state: undefined,
+
+    placed: [],
+    taken: [],
+    hands: [],
   },
   rooms: [],
+  player: { id: -1, name: "", hand: [] },
+  players: [],
 };
