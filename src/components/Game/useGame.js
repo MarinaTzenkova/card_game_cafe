@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { makeGame } from "../../socket";
-import { createGame } from "../../store/actions/game";
 
 export default function useGame() {
   const options = [3, 4, 5, 6, 7, 8];

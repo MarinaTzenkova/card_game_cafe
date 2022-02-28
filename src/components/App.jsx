@@ -9,13 +9,14 @@ import { joinGameCafe } from "../socket";
 import { useDispatch } from "react-redux";
 import { GameJoin } from "./Game/GameJoin";
 import RWhist from "./Whist/RWhist";
+import WaitingRoom from "./Game/WaitingRoom";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     // attach sockets for game info
     joinGameCafe(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/game/:id/join" element={<GameJoin />} />
+          <Route path="/game/:id/waiting-room" element={<WaitingRoom />} />
           <Route path="/game/:id" element={<RWhist />} />
           <Route path="/game" element={<Game />} />
           <Route path="/rooms" element={<Rooms />} />

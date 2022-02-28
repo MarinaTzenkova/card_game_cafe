@@ -34,22 +34,26 @@ module.exports = (gameService, playerService, socket, io) => {
     const id = playerService.getPlayers().length;
     state_machine.changeState(game.dbState);
     state_machine.dispatch("playerJoin", id);
+
+    // update db
     playerService.addPlayer({ id, name });
+    gameService.updateGame(gameId, state_machine.game);
 
     if (state_machine.state === "ROUND_INIT") {
       socket.to("game_cafe").emit("GAME_FULL", gameId);
 
-      const players = playerService.getPlayers();
+      // const players = playerService.getPlayers();
 
-      state_machine.dispatch("setRoundInit", 1, players[0].id);
-      state_machine.dispatch("deal", players);
-      socket.to(`game-${gameId}`).emit("GAME_STARTING", gameId);
+      // state_machine.dispatch("setRoundInit", 1, players[0].id);
+      // state_machine.dispatch("deal", players);
+      // socket.to(`game-${gameId}`).emit("GAME_STARTING", gameId);
     } else {
       socket.to("game_cafe").emit("UPDATE_GAMES");
     }
 
     io.to(socket.id).emit("PLAYER_ID", id);
-    gameService.updateGame(gameId, state_machine.game);
+    io.to(`game-${gameId}`).emit("PLAYER_JOINED", gameId);
+    socket.to(`game-${gameId}`).emit("GAME_STARTING", gameId);
   });
 
   socket.on("PLAY_CARD", (body) => {

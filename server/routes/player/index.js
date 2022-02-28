@@ -27,6 +27,7 @@ module.exports = (app, db) => {
 
   app.get("/player/:gameId/:id", (req, res) => {
     const id = req.params["id"];
+    console.log("Fetching player " + id);
     const gameId = req.params["gameId"];
     const game = gameService.getGame(gameId);
 

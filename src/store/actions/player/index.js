@@ -14,6 +14,7 @@ export function getPlayerSuccess(player) {
 }
 
 export function getPlayers(id, gameId) {
+  console.log("Players fetched");
   return function (dispatch) {
     return playerService.getPlayers(id, gameId).then((players) => {
       dispatch(getPlayersSuccess(players));

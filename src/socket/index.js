@@ -13,6 +13,14 @@ export function joinGameRoom(id, dispatch) {
   socket.emit("join", `game-${id}`);
 }
 
+function dispatchAll(dispatch, gameId) {
+  const playerId = parseInt(getCookie("playerId"));
+
+  dispatch(getGame(gameId));
+  dispatch(getPlayers(playerId, gameId));
+  dispatch(getPlayer(playerId, gameId));
+}
+
 export function joinGameCafe(dispatch) {
   socket.emit("join", "game_cafe");
   socket.on("welcome", function (message) {
@@ -26,16 +34,18 @@ export function joinGameCafe(dispatch) {
     dispatch(getRooms());
   });
 
+  socket.on("PLAYER_JOINED", (message) => {
+    console.log("Player just joined");
+    dispatchAll(dispatch, message);
+  });
+
   socket.on("GAME_FULL", () => {
     console.log("game is full");
   });
 
   socket.on("GAME_STARTING", (message) => {
-    const playerId = parseInt(getCookie("playerId"));
-
-    dispatch(getGame(message));
-    dispatch(getPlayers(playerId, message));
-    dispatch(getPlayer(playerId, message));
+    console.log(message);
+    dispatchAll(message);
   });
 
   socket.on("PLAYER_ID", (message) => {
@@ -43,20 +53,11 @@ export function joinGameCafe(dispatch) {
   });
 
   socket.on("CARD_PLAYED", (message) => {
-    console.log(message);
-    const gameId = message;
-    const playerId = parseInt(getCookie("playerId"));
-    dispatch(getGame(gameId));
-    dispatch(getPlayers(playerId, gameId));
-    dispatch(getPlayer(playerId, gameId));
+    dispatchAll(message);
   });
 
   socket.on("ROUND_FINISHED", (message) => {
-    const gameId = message;
-    const playerId = parseInt(getCookie("playerId"));
-    dispatch(getGame(gameId));
-    dispatch(getPlayers(playerId, gameId));
-    dispatch(getPlayer(playerId, gameId));
+    dispatchAll(message);
   });
 }
 
@@ -65,8 +66,8 @@ export function makeGame(dispatch, game) {
 }
 
 export function joinGame(dispatch, gameId, playerName) {
-  socket.emit("PLAYER_JOIN", { gameId, name: playerName });
   socket.emit("join", `game-${gameId}`);
+  socket.emit("PLAYER_JOIN", { gameId, name: playerName });
 }
 
 export function placeCard(gameId, playerId, card) {

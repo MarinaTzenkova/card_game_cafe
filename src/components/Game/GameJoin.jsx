@@ -15,7 +15,7 @@ export const GameJoin = () => {
   function handleJoin() {
     if (id !== -1 && userName !== "") {
       joinGame(dispatch, id, userName);
-      navigate(`/game/${id}`);
+      navigate(`/game/${id}/waiting-room`);
     }
   }
 
