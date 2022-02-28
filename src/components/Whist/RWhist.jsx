@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 
-import Board from "../common/Board";
-import Participants from "../common/Participants";
+import Board from "../common/Layout/Board";
+import Participants from "../common/Layout/Participants";
 
 import GameData from "./GameData";
 import { placeCard } from "../../socket";

@@ -1,15 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import { Layout } from "./common/Layout";
+import { Layout } from "./common/Layout/Layout";
 import { Home } from "./Home/Home";
-import NavBar from "./common/NavBar";
-import Game from "./Game/Game";
 import { useEffect } from "react";
-import Rooms from "./Game/Rooms";
-import { joinGameCafe } from "../socket";
 import { useDispatch } from "react-redux";
+import { joinGameCafe } from "../socket";
+
+import Game from "./Game/Game";
+import Rooms from "./Game/Rooms";
 import { GameJoin } from "./Game/GameJoin";
 import RWhist from "./Whist/RWhist";
 import WaitingRoom from "./Game/WaitingRoom";
+import NavBar from "./common/NavigationBar/NavBar";
 
 function App() {
   const dispatch = useDispatch();

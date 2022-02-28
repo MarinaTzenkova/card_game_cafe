@@ -1,16 +1,15 @@
-import useGame from "./useGame";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { makeGame } from "../socket";
 
 export default function Game() {
-  const {
-    options,
-    players,
-    setPlayers,
-    name,
-    setName,
-    error,
-    setError,
-    startGame,
-  } = useGame();
+  const options = [3, 4, 5, 6, 7, 8];
+  const [players, setPlayers] = useState(3);
+  const [name, setName] = useState("");
+  const [error, setError] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleChange(event) {
     const newVal = parseInt(event.target.value);
@@ -25,6 +24,18 @@ export default function Game() {
       setError(false);
     }
     setName(input);
+  }
+
+  function createGame() {
+    if (!error) {
+      const newGame = {
+        name,
+        mode: "1-8-1",
+        amountOfParticipants: players,
+      };
+      makeGame(dispatch, newGame);
+      navigate("/rooms");
+    }
   }
 
   return (
@@ -65,7 +76,7 @@ export default function Game() {
         className={`bg-slate-400 rounded-lg w-64 text-center text-white  mt-5 ${
           error ? "cursor-not-allowed" : "cursor-pointer"
         }`}
-        onClick={() => startGame()}
+        onClick={() => createGame()}
       >
         Submit
       </div>
