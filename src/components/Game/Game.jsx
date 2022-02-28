@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { makeGame } from "../socket";
+import { makeGame } from "../../socket";
 
 export default function Game() {
   const options = [3, 4, 5, 6, 7, 8];
