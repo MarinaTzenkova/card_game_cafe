@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { CardBack } from "./Cards/CardBack";
-import { CardFront } from "./Cards/CardFront";
-import Dragable from "./Effects/Dragable";
+import { CardBack } from "../Cards/CardBack";
+import { CardFront } from "../Cards/CardFront";
+import Dragable from "../Effects/Dragable";
 
 export default function Deck() {
   const game = useSelector((state) => state.game);

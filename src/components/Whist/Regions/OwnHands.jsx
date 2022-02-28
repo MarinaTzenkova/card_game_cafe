@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import getOffset from "../../utils/getOffset";
-import { CardBack } from "./Cards/CardBack";
-import { CardFront } from "./Cards/CardFront";
-import Dragable from "./Effects/Dragable";
+import getOffset from "../../../utils/getOffset";
+import { CardBack } from "../Cards/CardBack";
+import { CardFront } from "../Cards/CardFront";
+import Dragable from "../Effects/Dragable";
 
 export default function OwnHand({ setPlaced }) {
   const game = useSelector((state) => state.game);

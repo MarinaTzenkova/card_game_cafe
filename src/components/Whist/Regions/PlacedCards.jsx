@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { CardFront } from "./Cards/CardFront";
+import { CardFront } from "../Cards/CardFront";
 
 export default function PlacedCards() {
   const game = useSelector((state) => state.game);
